@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/character.dart';
+import 'package:untitled_tec_game/constants.dart';
 import 'package:untitled_tec_game/player.dart';
 
 class GameScope extends FlameGame {
@@ -11,6 +13,14 @@ class GameScope extends FlameGame {
     super.children,
     this.bgColor = Colors.white,
   });
+
+  GameScope.web({
+    this.bgColor = Colors.white,
+  }) : super(
+            camera: CameraComponent.withFixedResolution(
+          width: gameWidth,
+          height: gameHeight,
+        ));
 
   @override
   FutureOr<void> onLoad() {

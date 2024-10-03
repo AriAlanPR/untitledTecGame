@@ -23,7 +23,7 @@ class _GameAppState extends State<GameApp> {
   @override
   void initState() {
     super.initState();
-    game = GameScope();
+    game = _isMobile ? GameScope() : GameScope.web();
   }
 
   Widget _gameWidget() {
@@ -35,6 +35,11 @@ class _GameAppState extends State<GameApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+        ),
+      ),
       home: Scaffold(
         body: SafeArea(
           child: _isMobile
