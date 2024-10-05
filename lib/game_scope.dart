@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -48,5 +47,20 @@ class GameScope extends FlameGame {
     return bgColor;
   }
 
-  void _addCharacter() {}
+  //NOTE - By default the center of the world(in this case the screen) is at position (0,0)
+  void _addCharacter({double x = 0, double y = 0, Color? color, bool isPlayer = false}) {
+    if (isPlayer) {
+      world.add(Player(
+        position: Vector2(x, y),
+        radius: 50,
+        color: color ?? Colors.red,
+      ));
+    } else {
+      world.add(Character(
+        position: Vector2(x, y),
+        radius: 20,
+        color: color ?? Colors.blue,
+      ));
+    }
+  }
 }
