@@ -16,12 +16,20 @@ class MyDialog {
       required Function() onConfirmation,
       Function()? onCancel,
     }) {
+    if(confirmation == "Ok") {
+      confirmation = confirmation.i18n();
+    }
+
+    if(cancel == "Cancel") {
+      cancel = cancel.i18n();
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text(title.i18n()),
-          content: Text(message.i18n()),
+          title: Text(title),
+          content: Text(message),
           actions: [
             ElevatedButton(
               onPressed: () {
@@ -80,6 +88,14 @@ class MyDialog {
   }) {
     if(title.isEmpty) {
       title = "${"info".i18n()} :";
+    }
+
+    if(confirmation == "Ok") {
+      confirmation = confirmation.i18n();
+    }
+
+    if(message == "notice") {
+      message = message.i18n();
     }
 
     showCustom(

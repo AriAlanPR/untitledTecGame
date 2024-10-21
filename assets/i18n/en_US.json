@@ -1,3 +1,9 @@
 {
-    "ok": "Ok"
+    "ok": "Ok",
+    "cancelar": "Cancel",
+    "aviso": "Notice",
+    "exito": "Success",
+    "error": "Error",
+    "implementacion": "Implementation",
+    "implementacion_pendiente": "Implementation pending"
 }
