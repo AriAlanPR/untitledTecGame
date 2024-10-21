@@ -19,9 +19,16 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
   void initState() {
     super.initState();
     game = isMobile ? GameScope() : GameScope.web();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     width = calculatedWidth(context);
     height = calculatedHeight(context);
+    print("height: $height width: $width");
   }
+
 
   Widget _gameWidget() {
     return GameWidget(
@@ -56,12 +63,15 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          SizedBox(
+            height: height * 0.1,
+          ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: AssetImage('assets/images/banner.png'),
-                width: 200,
+                width: 400,
                 height: 100,
                 fit: BoxFit.fill,
               ),
