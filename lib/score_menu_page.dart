@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 
 class ScoreMenuPage extends StatelessWidget with ValidateMixin {
@@ -28,7 +29,7 @@ class ScoreMenuPage extends StatelessWidget with ValidateMixin {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
       child: Container(
-        height: calculatedHeight(context),
+        width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -41,17 +42,15 @@ class ScoreMenuPage extends StatelessWidget with ValidateMixin {
             end: Alignment.bottomRight,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 40),
-              _text("High Scores"),
-              SizedBox(height: 20),
-              ...scores.map((score) => _text(score.toString())),
-              SizedBox(height: 80),
-            ],
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 40),
+            _text("puntajes".i18n()),
+            SizedBox(height: 20),
+            ...scores.map((score) => _text(score.toString())),
+            SizedBox(height: 80),
+          ],
         ),
       ),
     );

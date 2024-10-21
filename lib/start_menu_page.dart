@@ -15,8 +15,8 @@ class StartMenu extends StatefulWidget {
 
 class _StartMenuState extends State<StartMenu> with ValidateMixin {
   late final GameScope game;
-  late final double width;
-  late final double height;
+  late double width;
+  late double height;
   final double defaultButtonOpacity = 0.9;
 
   @override
@@ -27,13 +27,6 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
     game = isMobile ? GameScope() : GameScope.web();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    width = calculatedWidth(context);
-    height = calculatedHeight(context);
-    println("height: $height width: $width");
-  }
 
   void onStart() {
     println("starting game...");
@@ -44,6 +37,10 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
 
   @override
   Widget build(BuildContext context) {
+    width = calculatedWidth(context);
+    height = calculatedHeight(context);
+    println("height: $height width: $width");
+    
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

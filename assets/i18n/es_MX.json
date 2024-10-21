@@ -5,5 +5,6 @@
     "exito": "Completado",
     "error": "Error",
     "implementacion": "Implementación",
-    "implementacion_pendiente": "Implementación pendiente"
+    "implementacion_pendiente": "Implementación pendiente",
+    "puntajes": "Puntajes"
 }
