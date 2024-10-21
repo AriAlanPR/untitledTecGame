@@ -31,8 +31,9 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
   void onStart() {
     println("starting game...");
     Particles(
-      context: context,                      
-    ).showConfetti();
+      context: context,
+      number: 30,
+    ).showStar();
   }
 
   @override
@@ -40,7 +41,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
     width = calculatedWidth(context);
     height = calculatedHeight(context);
     println("height: $height width: $width");
-    
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -109,7 +110,9 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                   onPressed: () {
                     println("puntitos presionado");
                     Particles(
-                      context: context,                      
+                      context: context,
+                      vertically: 90,
+                      horizontally: 20,
                     ).showConfetti();
 
                     Navigator.pushNamed(
@@ -134,7 +137,10 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                     println("configuracion presionado");
                     Particles(
                       context: context,
-                    ).showConfetti();
+                      number: 20,
+                      vertically: 90,
+                      horizontally: 80,
+                    ).showEmoji();
 
                     Navigator.pushNamed(
                       context,

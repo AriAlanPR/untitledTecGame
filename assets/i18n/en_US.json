@@ -6,5 +6,6 @@
     "error": "Error",
     "implementacion": "Implementation",
     "implementacion_pendiente": "Implementation pending",
-    "puntajes": "High Scores"
+    "puntajes": "High Scores",
+    "configuracion": "Configuration"
 }

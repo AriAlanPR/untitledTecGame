@@ -72,6 +72,19 @@ class Particles {
     );
   }
 
+  void showEmoji() {
+    Confetti.launch(
+      context,
+      options: ConfettiOptions(
+        particleCount: number,
+        spread: arc,
+        y: Particles.positionFromPercent(vertically),
+        x: Particles.positionFromPercent(horizontally),
+      ),
+      particleBuilder: (index) => Emoji(emoji: '⚙️'),
+    );
+  }
+
   static double positionFromPercent(double percent) {
     return percent / 100;
   }

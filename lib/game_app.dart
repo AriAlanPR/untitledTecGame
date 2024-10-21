@@ -21,7 +21,6 @@ class GameApp extends StatefulWidget {
 
 class _GameAppState extends State<GameApp> with ValidateMixin {
   String currentRoute = '/';
-  bool _requireAppBar = false;
 
   Widget _gameWidget() {
     final game = isMobile ? GameScope() : GameScope.web();
@@ -94,9 +93,8 @@ class _GameAppState extends State<GameApp> with ValidateMixin {
         GlobalCupertinoLocalizations.delegate,
         LocalJsonLocalization.delegate,
       ],
-      home: Scaffold(
-        appBar: _requireAppBar ? _appBar() : null,
-        body: Navigator(
+      home: Material(
+        child: Navigator(
           onGenerateRoute: (settings) {
             //NOTE: uncomment and use this in case is required to pass arguments dynamically
             final args = settings.arguments as Map<String, dynamic>?;

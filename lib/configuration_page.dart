@@ -1,37 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:untitled_tec_game/utils/coolborders.dart';
+import 'package:localization/localization.dart';
+import 'package:untitled_tec_game/mixins/validate_mixin.dart';
+import 'package:untitled_tec_game/utils/app_colors.dart';
+import 'package:untitled_tec_game/widgets/easytext.dart';
 
-class ConfigurationPage extends StatelessWidget {
+class ConfigurationPage extends StatelessWidget with ValidateMixin {
   final String defaultName = "Guest";
 
-  const ConfigurationPage({
-    super.key,
+  ConfigurationPage({
+    super.key,  
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: CoolBorders(
-          borderDesign: BorderDesign.all,
-          radius: 40,
-        ).getRadius,
-        gradient: LinearGradient(
-          colors: [
-            Colors.grey.shade800.withOpacity(1),
-            Colors.grey.shade700,
-            Colors.blueGrey.shade800,
-            Colors.blueGrey.shade700.withOpacity(1)
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Easytext(text: "configuracion".i18n(), size: 40),
+        backgroundColor: Colors.blueGrey.shade800,
+        foregroundColor: Colors.white,
       ),
-      child: Center(
-        child: Column(
-          children: [
-            Text("Configuration user is $defaultName"),
-          ],
+      body: Container(
+        color: AppColors.navy,
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            width: double.infinity,
+            height: calculatedHeight(context),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.grey.shade800,
+                  Colors.grey.shade600.withOpacity(0.7),
+                  Colors.blueGrey.shade800.withOpacity(0.7),
+                  Colors.blueGrey.shade600.withOpacity(0.7)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 20),
+                Easytext(text: ""),
+                SizedBox(height: 80),
+              ],
+            ),
+          ),
         ),
       ),
     );
