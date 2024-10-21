@@ -23,4 +23,11 @@ class Navigate {
       ),
     );
   }
+
+  CubePageRoute get route => CubePageRoute(
+    enterPage: toPage,
+    exitPage: fromPage,
+    duration: Duration(milliseconds: milliseconds),
+    backgroundColor: AppColors.navy,
+  );
 }

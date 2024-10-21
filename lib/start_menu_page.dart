@@ -1,13 +1,9 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled_tec_game/configuration_page.dart';
 import 'package:untitled_tec_game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
-import 'package:untitled_tec_game/score_menu_page.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
-import 'package:untitled_tec_game/utils/navigate.dart';
 import 'package:untitled_tec_game/widgets/particles.dart';
 
 class StartMenu extends StatefulWidget {
@@ -24,6 +20,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
   final double defaultButtonOpacity = 0.9;
 
   @override
+
   void initState() {
     super.initState();
     
@@ -38,29 +35,11 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
     println("height: $height width: $width");
   }
 
-
-  Widget _gameWidget() {
-    return GameWidget(
-      game: game,
-    );
-  }
-
-  Widget onStart() {
+  void onStart() {
     println("starting game...");
     Particles(
       context: context,                      
     ).showConfetti();
-
-    return isMobile
-      ? _gameWidget()
-      : Center(
-          child: FittedBox(
-              child: SizedBox(
-            width: defaultWidth,
-            height: defaultHeight,
-            child: _gameWidget(),
-          )),
-        );
   }
 
   @override
@@ -131,15 +110,15 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
               children: [
                 ElevatedButton( //NOTE - puntajes
                   onPressed: () {
+                    println("puntitos presionado");
                     Particles(
                       context: context,                      
                     ).showConfetti();
 
-                    Navigate(
-                      fromPage: widget,
-                      toPage: ScoreMenuPage(),
-                    ).animate(context);
-                    println("puntitos presionado");
+                    Navigator.pushNamed(
+                      context,
+                      '/scores',
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.lightButtonBackground,
@@ -155,15 +134,15 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                 ),
                 ElevatedButton( //NOTE - configuracion
                   onPressed: () {
+                    println("configuracion presionado");
                     Particles(
                       context: context,
                     ).showConfetti();
 
-                    Navigate(
-                      fromPage: widget,
-                      toPage: ConfigurationPage(),
-                    ).animate(context);
-                    println("configuracion presionado");
+                    Navigator.pushNamed(
+                      context,
+                      '/configuration',
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.lightButtonBackground,
