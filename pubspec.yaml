@@ -43,6 +43,15 @@ dependencies:
     sdk: flutter
   localization: ^2.1.1
 
+flutter_native_splash:
+  color: "#042B59"
+  image: assets/images/splash.png
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/launcher.png"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

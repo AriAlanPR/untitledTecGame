@@ -4,6 +4,13 @@ import 'package:untitled_tec_game/utils/log_handler.dart';
 class PersistentData {
   static SharedPreferences? preferences;
 
+  /// Initializes the shared preferences instance for persistent data storage.
+  ///
+  /// This method must be called before accessing or modifying any persistent
+  /// data using the [PersistentData] class. It retrieves an instance of
+  /// [SharedPreferences] and assigns it to the [preferences] variable.
+  ///
+  /// Returns a [Future] that completes when the initialization is done.
   static Future<void> init() async {
     preferences = await SharedPreferences.getInstance();
   }
@@ -16,7 +23,7 @@ class PersistentData {
   ///
   /// Returns a [Future] that completes with a boolean value indicating whether the data was successfully saved.
   /// If an error occurs during the saving process, the function returns `false`.
-  static Future<bool> save(List<String> keys, Map<String, dynamic> bodyValues) async {
+  static Future<bool> saveMany(List<String> keys, Map<String, dynamic> bodyValues) async {
     try {
       for(String key in keys) {
         await preferences!.setString(key, bodyValues[key]);
@@ -33,7 +40,7 @@ class PersistentData {
   /// @param {String} key - The key to save.
   /// @param {String} value - The value to save.
   /// @return {Future<bool>} - A Future that completes with a boolean value indicating whether the data was successfully saved.
-  static Future<bool> saveSingle(String key, String value) async {
+  static Future<bool> save(String key, String value) async {
     try {
       await preferences!.setString(key, value);
       
@@ -113,6 +120,7 @@ class PersistentData {
       return false;
     }
   }
+  
   /// Removes the user tokens from the shared preferences.
   ///
   /// Returns a `Future<bool>` that completes with `true` if the tokens were
@@ -129,10 +137,14 @@ class PersistentData {
     }
   }
 
+  /// Clears all key-value pairs from the shared preferences.
+  ///
+  /// Returns a `Future<bool>` that completes with `true` if the data was
+  /// successfully cleared, and `false` otherwise.
   static Future<bool> clear() async {
     try {
       final result = preferences!.clear();
-      myPrint("clear result: $result");
+      println("clear result: $result");
 
       return result;
     } catch (e) {

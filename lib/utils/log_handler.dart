@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 //NOTE - verify code is not outside an if with kdebugmode validated before making release build
 //error handler
-void basicErrorHandle(Object e, StackTrace? stackTrace) {
+void printerr(Object e, StackTrace? stackTrace) {
   if (kDebugMode) {
     //debug foundation output
     debugPrint("Error: $e");
@@ -17,7 +17,7 @@ void basicErrorHandle(Object e, StackTrace? stackTrace) {
   // developer.log("Error: $e", stackTrace: stackTrace);
 }
 
-void myPrint(Object? message) {
+void println(Object? message) {
   if (kDebugMode) {
     //debug foundation output
     if(message is String) {

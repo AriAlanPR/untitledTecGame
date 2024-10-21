@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
+import 'package:untitled_tec_game/utils/log_handler.dart';
 
 class StartMenu extends StatefulWidget {
   const StartMenu({super.key});
@@ -18,6 +19,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
   @override
   void initState() {
     super.initState();
+    
     game = isMobile ? GameScope() : GameScope.web();
   }
 
@@ -26,7 +28,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
     super.didChangeDependencies();
     width = calculatedWidth(context);
     height = calculatedHeight(context);
-    print("height: $height width: $width");
+    println("height: $height width: $width");
   }
 
 
@@ -88,13 +90,13 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  print("puntitos presionado");
+                  println("puntitos presionado");
                 },
                 child: const Text("Puntos"),
               ),
               ElevatedButton(
                 onPressed: () {
-                  print("configuracion presionado");
+                  println("configuracion presionado");
                 }, 
                 child: const Text("Configuracion"),
               ),
