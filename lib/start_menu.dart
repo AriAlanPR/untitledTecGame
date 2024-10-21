@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
+import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
-import 'package:untitled_tec_game/widgets/gradient_button.dart';
 
 class StartMenu extends StatefulWidget {
   const StartMenu({super.key});
@@ -17,6 +17,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
   late final GameScope game;
   late final double width;
   late final double height;
+  final double defaultButtonOpacity = 0.9;
 
   @override
   void initState() {
@@ -68,28 +69,51 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            height: height * 0.1,
-          ),
-          const Row(
+          SizedBox(),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: AssetImage('assets/images/banner.png'),
-                width: 400,
+                width: width * 0.65,
                 height: 100,
                 fit: BoxFit.fill,
               ),
             ],
           ),
-          SizedBox(
-            width: width * 0.35,
-            child: GradientButton(
-              onPressed: onStart,
-              icon: Icons.play_arrow_sharp,
-              iconSize: 60.0,
-              color: Colors.green.shade900,
-              gradientColor: Colors.white.withOpacity(0.95),
+          ElevatedButton(
+            onPressed: onStart,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              elevation: 5,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: CoolBorders(
+                  borderDesign: BorderDesign.all,
+                  radius: 40,
+                ).getRadius,
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.green.shade300.withOpacity(defaultButtonOpacity),
+                    Colors.green.shade200,
+                    Colors.green.shade100,
+                    Colors.white.withOpacity(defaultButtonOpacity)
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 4.0,
+                  horizontal: 48.0,
+                ),
+                child: Icon(
+                  Icons.play_arrow,
+                  size: 70.0,
+                ),
+              ),
             ),
           ),
           Padding( 
