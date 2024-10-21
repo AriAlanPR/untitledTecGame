@@ -20,9 +20,7 @@ class _GameAppState extends State<GameApp> {
         colorScheme: AppColors.seed,
       ),
       home: const Scaffold(
-        body: SafeArea(
-          child: StartMenu(),
-        ),
+        body: StartMenu(),
       ),
     );
   }

@@ -78,18 +78,18 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(),
-          Row(
+          Row( //NOTE - banner de titulo
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: AssetImage('assets/images/banner.png'),
-                width: width * 0.65,
-                height: 100,
+                width: width * 0.67,
+                height: height * 0.1,
                 fit: BoxFit.fill,
               ),
             ],
           ),
-          ElevatedButton(
+          ElevatedButton( //NOTE - jugar
             onPressed: onStart,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
@@ -112,14 +112,14 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                   end: Alignment.bottomRight,
                 ),
               ),
-              child: Padding(
+              child: Padding( //icono de jugar
                 padding: const EdgeInsets.symmetric(
                   vertical: 4.0,
                   horizontal: 48.0,
                 ),
                 child: Icon(
                   Icons.play_arrow,
-                  size: 70.0,
+                  size: height * 0.08,
                 ),
               ),
             ),
@@ -129,17 +129,16 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
+                ElevatedButton( //NOTE - puntajes
                   onPressed: () {
                     Particles(
                       context: context,                      
                     ).showConfetti();
 
                     Navigate(
-                      context: context,
                       fromPage: widget,
                       toPage: ScoreMenuPage(),
-                    ).animate();
+                    ).animate(context);
                     println("puntitos presionado");
                   },
                   style: ElevatedButton.styleFrom(
@@ -150,21 +149,20 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                     padding: const EdgeInsets.all(4.0),
                     child: Icon(
                       Icons.emoji_events,
-                      size: 50.0,
+                      size: height * 0.07,
                     ),
                   ),
                 ),
-                ElevatedButton(
+                ElevatedButton( //NOTE - configuracion
                   onPressed: () {
                     Particles(
                       context: context,
                     ).showConfetti();
 
                     Navigate(
-                      context: context,
                       fromPage: widget,
                       toPage: ConfigurationPage(),
-                    ).animate();
+                    ).animate(context);
                     println("configuracion presionado");
                   },
                   style: ElevatedButton.styleFrom(
@@ -175,7 +173,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                     padding: const EdgeInsets.all(4.0),
                     child: Icon(
                       Icons.settings,
-                      size: 50.0,
+                      size: height * 0.07,
                     ),
                   ),
                 ),
