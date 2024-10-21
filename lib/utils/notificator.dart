@@ -1,29 +1,29 @@
 // import 'dart:async';
 
-// import 'package:bstock/utils/animations.dart';
-// import 'package:bstock/utils/bstock_api.dart';
-// import 'package:bstock/views/asignaciones.dart';
+// import 'package:untitled_tec_game/utils/animations.dart';
+// import 'package:untitled_tec_game/utils/untitled_tec_game_api.dart';
+// import 'package:untitled_tec_game/views/asignaciones.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-// import 'package:bstock/utils/loghandler.dart';
+// import 'package:untitled_tec_game/utils/loghandler.dart';
 
-// //NOTE: Notification of Del Bravo Tech Bstock app service
+// //NOTE: Notification of untitled_tec_game app service
 
-// class TechNotification {
-//   static final TechNotification _instance =
-//       TechNotification._internal();
+// class Notificator {
+//   static final Notificator _instance =
+//       Notificator._internal();
 //   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 //   StreamSubscription<RemoteMessage>? _onMessageSubscription;
 //   StreamSubscription<RemoteMessage>? _onMessageOpenedAppSubscription;
 
 
 //   //NOTE: singleton constructor handle
-//   factory TechNotification() {
+//   factory Notificator() {
 //     return _instance;
 //   }
-//   TechNotification._internal();
+//   Notificator._internal();
 
 //   //NOTE: Notification functions
 
@@ -64,7 +64,7 @@
 //     //TODO - Improve this counter logic
 //     PersistentData.increaseCounter(countKey: 'notification_count');
 //     //no longer required since is better to redirect to "asignaciones"
-//     // BstockAPI.openUrl(payload['url']);
+//     // API.openUrl(payload['url']);
 //   }
 
 //   /// Adds the notification handler for FirebaseMessaging.
@@ -223,7 +223,7 @@
 //         myPrint("Mobile log:: NotificationService: Received a notification response: $payload");
         
 //         //validate saved user tokens
-//         final userTokens = await BstockAPI.getTokenData();
+//         final userTokens = await API.getTokenData();
 //         final invalidNavigateValues = [null, "", "TRIAL"];
 //         if(!(invalidNavigateValues.contains(userTokens['access_token']) || invalidNavigateValues.contains(userTokens['token_id']))) {
 //           //go to main page
@@ -240,7 +240,7 @@
 
 //   // Returns the initialization settings for the notification details for both Android and iOS platforms.
 //   notificationDetails() {
-//     const String groupKey = 'com.delbravotech.bstock.NOTIFICATIONS';
+//     const String groupKey = 'com.delbravotech.untitled_tec_game.NOTIFICATIONS';
     
 //     return const NotificationDetails(
 //         android: AndroidNotificationDetails('channelId', 'channelName',
@@ -250,7 +250,7 @@
 //             groupKey: groupKey,
 //         ),
 //         iOS: DarwinNotificationDetails(
-//           threadIdentifier: 'Bstockapp',
+//           threadIdentifier: 'untitled_tec_gameapp',
 //         ));
 //   }
 
