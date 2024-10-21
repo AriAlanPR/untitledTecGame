@@ -5,6 +5,7 @@ import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
+import 'package:untitled_tec_game/widgets/particles.dart';
 
 class StartMenu extends StatefulWidget {
   const StartMenu({super.key});
@@ -43,6 +44,10 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
 
   Widget onStart() {
     println("starting game...");
+    Particles(
+      context: context,                      
+    ).showConfetti();
+    
     return isMobile
       ? _gameWidget()
       : Center(
@@ -124,6 +129,9 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                 ElevatedButton(
                   onPressed: () {
                     println("puntitos presionado");
+                    Particles(
+                      context: context,                      
+                    ).showConfetti();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.lightButtonBackground,
@@ -140,6 +148,9 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                 ElevatedButton(
                   onPressed: () {
                     println("configuracion presionado");
+                    Particles(
+                      context: context,                      
+                    ).showConfetti();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.lightButtonBackground,

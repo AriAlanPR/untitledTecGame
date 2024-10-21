@@ -10,15 +10,18 @@ class Particles {
   final double vertically;
   ///horizontal percentage coordinate from left, defaults at center of the screen
   final double horizontally;
+  ///the context where the confetti will be shown
+  final BuildContext context;
 
   const Particles({
     this.number = 50,
     this.arc = 45,
     this.vertically = 50,
     this.horizontally = 50,
+    required this.context,
   });
 
-  void showConfetti(BuildContext context) {
+  void showConfetti() {
     Confetti.launch(
       context,
       options: ConfettiOptions(
@@ -30,7 +33,7 @@ class Particles {
     );
   }
 
-  void showStar(BuildContext context) {
+  void showStar() {
     Confetti.launch(
       context,
       options: ConfettiOptions(
@@ -40,6 +43,32 @@ class Particles {
         x: Particles.positionFromPercent(horizontally),
       ),
       particleBuilder: (index) => Star(),
+    );
+  }
+
+  void showCircle() {
+    Confetti.launch(
+      context,
+      options: ConfettiOptions(
+        particleCount: number,
+        spread: arc,
+        y: Particles.positionFromPercent(vertically),
+        x: Particles.positionFromPercent(horizontally),
+      ),
+      particleBuilder: (index) => Circle(),
+    );
+  }
+
+  void showTriangle() {
+    Confetti.launch(
+      context,
+      options: ConfettiOptions(
+        particleCount: number,
+        spread: arc,
+        y: Particles.positionFromPercent(vertically),
+        x: Particles.positionFromPercent(horizontally),
+      ),
+      particleBuilder: (index) => Triangle(),
     );
   }
 
