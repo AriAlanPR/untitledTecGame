@@ -1,10 +1,13 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled_tec_game/configuration_page.dart';
 import 'package:untitled_tec_game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
+import 'package:untitled_tec_game/score_menu_page.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
+import 'package:untitled_tec_game/utils/navigate.dart';
 import 'package:untitled_tec_game/widgets/particles.dart';
 
 class StartMenu extends StatefulWidget {
@@ -47,7 +50,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
     Particles(
       context: context,                      
     ).showConfetti();
-    
+
     return isMobile
       ? _gameWidget()
       : Center(
@@ -128,10 +131,16 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    println("puntitos presionado");
                     Particles(
                       context: context,                      
                     ).showConfetti();
+
+                    Navigate(
+                      context: context,
+                      fromPage: widget,
+                      toPage: ScoreMenuPage(),
+                    ).animate();
+                    println("puntitos presionado");
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.lightButtonBackground,
@@ -147,10 +156,16 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    println("configuracion presionado");
                     Particles(
-                      context: context,                      
+                      context: context,
                     ).showConfetti();
+
+                    Navigate(
+                      context: context,
+                      fromPage: widget,
+                      toPage: ConfigurationPage(),
+                    ).animate();
+                    println("configuracion presionado");
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.lightButtonBackground,
