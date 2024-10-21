@@ -4,6 +4,7 @@ import 'package:untitled_tec_game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
+import 'package:untitled_tec_game/widgets/gradient_button.dart';
 
 class StartMenu extends StatefulWidget {
   const StartMenu({super.key});
@@ -81,19 +82,14 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
               ),
             ],
           ),
-          Center(
-            child: ElevatedButton(
+          SizedBox(
+            width: width * 0.35,
+            child: GradientButton(
               onPressed: onStart,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.lightButtonBackground,
-                elevation: 5,
-              ),
-              child: const Text(
-                "Jugar",
-                style: TextStyle(
-                  fontSize: 30.0,
-                ),
-              ),
+              icon: Icons.play_arrow_sharp,
+              iconSize: 60.0,
+              color: Colors.green.shade900,
+              gradientColor: Colors.white.withOpacity(0.95),
             ),
           ),
           Padding( 
@@ -109,7 +105,13 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                     backgroundColor: AppColors.lightButtonBackground,
                     elevation: 5,
                   ),
-                  child: const Text("Puntos"),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.emoji_events,
+                      size: 50.0,
+                    ),
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -119,7 +121,13 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                     backgroundColor: AppColors.lightButtonBackground,
                     elevation: 5,
                   ),
-                  child: const Text("Configuracion"),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.settings,
+                      size: 50.0,
+                    ),
+                  ),
                 ),
               ],
             ),
