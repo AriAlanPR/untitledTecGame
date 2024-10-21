@@ -12,4 +12,5 @@ class AppColors {
   static final yellow = Color(0xFFFFF275);
   static final purple = Color(0xFF6200EE);
   static final green = Color(0xFF1CDAC5);
+  static final lightButtonBackground = Colors.white.withOpacity(0.8);
 }

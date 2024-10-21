@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
+import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
 
 class StartMenu extends StatefulWidget {
@@ -83,7 +84,16 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
           Center(
             child: ElevatedButton(
               onPressed: onStart,
-              child: const Text("Jugar"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.lightButtonBackground,
+                elevation: 5,
+              ),
+              child: const Text(
+                "Jugar",
+                style: TextStyle(
+                  fontSize: 30.0,
+                ),
+              ),
             ),
           ),
           Padding( 
@@ -95,12 +105,20 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                   onPressed: () {
                     println("puntitos presionado");
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.lightButtonBackground,
+                    elevation: 5,
+                  ),
                   child: const Text("Puntos"),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     println("configuracion presionado");
-                  }, 
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.lightButtonBackground,
+                    elevation: 5,
+                  ),
                   child: const Text("Configuracion"),
                 ),
               ],
