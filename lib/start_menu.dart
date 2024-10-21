@@ -39,6 +39,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
   }
 
   Widget onStart() {
+    println("starting game...");
     return isMobile
       ? _gameWidget()
       : Center(
@@ -85,22 +86,25 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
               child: const Text("Jugar"),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  println("puntitos presionado");
-                },
-                child: const Text("Puntos"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  println("configuracion presionado");
-                }, 
-                child: const Text("Configuracion"),
-              ),
-            ],
+          Padding( 
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    println("puntitos presionado");
+                  },
+                  child: const Text("Puntos"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    println("configuracion presionado");
+                  }, 
+                  child: const Text("Configuracion"),
+                ),
+              ],
+            ),
           )
         ],
       ),
