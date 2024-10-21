@@ -34,6 +34,11 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
       context: context,
       number: 30,
     ).showStar();
+
+    Navigator.pushNamed(
+      context,
+      '/game',
+    );
   }
 
   @override

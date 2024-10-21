@@ -56,12 +56,6 @@ class _GameAppState extends State<GameApp> with ValidateMixin {
     }
   }
 
-  PreferredSizeWidget? _appBar() {
-    return AppBar(
-      title: Text('Tec Game'),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     LocalJsonLocalization.delegate.directories = ['assets/i18n'];
