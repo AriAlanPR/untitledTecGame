@@ -26,6 +26,9 @@ flutter_native_splash:
   color: "#ffffff"
   image: assets/images/splash.png
 ```
+- Instalacion:
+`dart run flutter_native_splash:create`
+- [ ] [documentacion](https://pub.dev/packages/flutter_native_splash)
 
 #### configuracion para icono de lanzamiento
 `flutter pub add flutter_icons`
@@ -35,3 +38,7 @@ flutter_icons:
   ios: true
   image_path: "assets/images/launcher.png"
 ```
+
+- Instalacion:
+`dart run flutter_launcher_icons:generate`
+- [ ] [documentacion](https://pub.dev/packages/flutter_launcher_icons)
