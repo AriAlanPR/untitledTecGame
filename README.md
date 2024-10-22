@@ -28,3 +28,4 @@ flutter_icons:
 - Instalacion:
 `dart run flutter_launcher_icons`
 - [ ] [documentacion](https://pub.dev/packages/flutter_launcher_icons)
+
