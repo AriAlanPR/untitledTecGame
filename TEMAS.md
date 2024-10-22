@@ -37,29 +37,30 @@ Renderización de componentes con sprites en el game loop.
 ## Sesión 4: Añadiendo Interacción e Input del Usuario (1.5 horas)
 
 ### Entradas del usuario (teclado, táctil, gestos).
-Añadiendo interacción táctil/clic a los elementos del juego.
-Creación de un personaje controlado por el jugador.
-Moviendo el personaje con gestos (arrastrar o tocar).
-Detección básica de colisiones (por ejemplo, cuando el jugador golpea un objeto).
+- Añadiendo interacción táctil/clic a los elementos del juego.
+- Creación de un personaje controlado por el jugador.
+- Moviendo el personaje con gestos (arrastrar o tocar).
+- Detección básica de colisiones (por ejemplo, cuando el jugador golpea un objeto).
 
 # Día 3: Mecánicas de Juego y Construcción de un Juego Simple (3 horas + 1 hora de descanso)
 ## Sesión 5: Componentes del Juego y Física Básica (1.5 horas)
 
 ### Creación de componentes del juego
-Componentes personalizados (jugador, enemigos, obstáculos).
-Reutilización de componentes en el game loop.
-Introducción a la física básica.
-Gravedad, velocidad y aceleración en Flame.
-Implementación de física básica para el movimiento del jugador (por ejemplo, saltar o caer).
-Sesión 6: Construcción de un Juego Simple (1.5 horas)
+- Componentes personalizados (jugador, enemigos, obstáculos).
+- Reutilización de componentes en el game loop.
+- Introducción a la física básica.
+- Gravedad, velocidad y aceleración en Flame.
+- Implementación de física básica para el movimiento del jugador (por ejemplo, saltar o caer).
+
+## Sesión 6: Construcción de un Juego Simple (1.5 horas)
 
 ### Configuración del juego: Construir un juego simple (por ejemplo, un corredor lateral o un juego sin fin).
-Diseñar un nivel simple.
-Implementar el movimiento del jugador y la interacción.
-Añadir obstáculos o enemigos.
-Toques finales.
-Añadir efectos de sonido o música de fondo.
-Llevar la cuenta de la puntuación o seguimiento del progreso del juego.
+- Diseñar un nivel simple.
+- Implementar el movimiento del jugador y la interacción.
+- Añadir obstáculos o enemigos.
+- Toques finales.
+- Añadir efectos de sonido o música de fondo.
+- Llevar la cuenta de la puntuación o seguimiento del progreso del juego.
 
 # Bono: Preguntas y Respuestas, Resumen y Feedback
 - Conocimientos de Flutter.
