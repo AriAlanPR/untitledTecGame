@@ -7,5 +7,8 @@
     "implementacion": "Implementación",
     "implementacion_pendiente": "Implementación pendiente",
     "puntajes": "Puntajes",
-    "configuracion": "Configuración"
+    "configuracion": "Configuración",
+    "ingrese_nombre": "Ingrese su nombre",
+    "guardar": "Guardar",
+    "reintentar": "Reintentar"
 }

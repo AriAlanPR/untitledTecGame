@@ -3,7 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game/components/character.dart';
-import 'package:untitled_tec_game/constants.dart';
+import 'package:untitled_tec_game/utils/constants.dart';
 import 'package:untitled_tec_game/game/components/player.dart';
 
 class GameScope extends FlameGame {

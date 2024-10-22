@@ -42,7 +42,27 @@ class ConfigurationPage extends StatelessWidget with ValidateMixin {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 20),
-                Easytext(text: ""),
+                Form(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Easytext(text: "ingrese_nombre".i18n(), size: 20),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          
+                        },
+                        child: Easytext(
+                          text: "Guardar".i18n(),
+                          size: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(height: 80),
               ],
             ),

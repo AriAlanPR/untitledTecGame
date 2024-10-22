@@ -4,11 +4,11 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
-import 'package:untitled_tec_game/configuration_page.dart';
+import 'package:untitled_tec_game/views/configuration_page.dart';
 import 'package:untitled_tec_game/game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
-import 'package:untitled_tec_game/score_menu_page.dart';
-import 'package:untitled_tec_game/start_menu_page.dart';
+import 'package:untitled_tec_game/views/score_menu_page.dart';
+import 'package:untitled_tec_game/views/start_menu_page.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/navigate.dart';
 

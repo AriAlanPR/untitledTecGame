@@ -42,7 +42,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   localization: ^2.1.1
-  icony: ^1.0.5
   flutter_confetti: ^0.3.4
   cube_transition_plus: ^2.0.1
 

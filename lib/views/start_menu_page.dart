@@ -5,6 +5,7 @@ import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
 import 'package:untitled_tec_game/widgets/particles.dart';
 
+//TODO - consider a welcome back from saved settings
 class StartMenu extends StatefulWidget {
   const StartMenu({super.key});
 

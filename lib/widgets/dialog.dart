@@ -5,8 +5,8 @@ import 'package:localization/localization.dart';
 import 'package:untitled_tec_game/extensions/nullable_extension.dart';
 import 'package:untitled_tec_game/utils/coolborders.dart';
 
-class MyDialog {
-  MyDialog._();
+class Dialogo {
+  Dialogo._();
 
   static void show(BuildContext context, {
       String title = "",
@@ -250,7 +250,7 @@ class MyDialog {
   }
 
   static void notImplementedNotice(BuildContext context) {
-    MyDialog.info(
+    Dialogo.info(
       context, 
       title: "implementation", 
       message: "Pending. Not implemented yet",
