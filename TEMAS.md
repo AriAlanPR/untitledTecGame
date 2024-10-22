@@ -28,11 +28,11 @@
 ## Sesión 3: Trabajo con Sprites y Animaciones (1.5 horas)
 
 ### Introducción a los sprites
-¿Qué son los sprites en los juegos 2D?
-Cargar y mostrar sprites en Flame.
-Uso de hojas de sprites para animaciones.
-Creación de animaciones simples con sprites (por ejemplo, un personaje caminando).
-Renderización de componentes con sprites en el game loop.
+- ¿Qué son los sprites en los juegos 2D?
+- Cargar y mostrar sprites en Flame.
+- Uso de hojas de sprites para animaciones.
+- Creación de animaciones simples con sprites (por ejemplo, un personaje caminando).
+- Renderización de componentes con sprites en el game loop.
 
 ## Sesión 4: Añadiendo Interacción e Input del Usuario (1.5 horas)
 
