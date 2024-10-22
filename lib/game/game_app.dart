@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
 import 'package:untitled_tec_game/configuration_page.dart';
-import 'package:untitled_tec_game/game_scope.dart';
+import 'package:untitled_tec_game/game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/score_menu_page.dart';
 import 'package:untitled_tec_game/start_menu_page.dart';

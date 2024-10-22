@@ -1,4 +1,4 @@
-import 'package:untitled_tec_game/game_components/character.dart';
+import 'package:untitled_tec_game/game/components/character.dart';
 
 class Player extends Character {
   Player({

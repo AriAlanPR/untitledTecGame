@@ -3,7 +3,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
 import 'package:untitled_tec_game/widgets/empty.dart';
 
-class MyAsyncWidget<T> extends StatelessWidget {
+class WidgetAsincrono<T> extends StatelessWidget {
   ///function that fetches the data to be displayed
   final Future<T> Function() fetchFunction;
   ///widget that displays when the response is successful
@@ -12,7 +12,7 @@ class MyAsyncWidget<T> extends StatelessWidget {
   final void Function(void Function() fn)? setParentState;
   final bool handleEmptyResults;
 
-  const MyAsyncWidget({
+  const WidgetAsincrono({
     super.key, 
     required this.fetchFunction, 
     required this.responseWidget, 

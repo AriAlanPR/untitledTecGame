@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled_tec_game/game_scope.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/coolborders.dart';
@@ -14,7 +13,6 @@ class StartMenu extends StatefulWidget {
 }
 
 class _StartMenuState extends State<StartMenu> with ValidateMixin {
-  late final GameScope game;
   late double width;
   late double height;
   final double defaultButtonOpacity = 0.9;
@@ -23,8 +21,6 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
 
   void initState() {
     super.initState();
-    
-    game = isMobile ? GameScope() : GameScope.web();
   }
 
 

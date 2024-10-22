@@ -1,6 +1,6 @@
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled_tec_game/game_app.dart';
+import 'package:untitled_tec_game/game/game_app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
