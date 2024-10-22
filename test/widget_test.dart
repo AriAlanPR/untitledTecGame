@@ -6,11 +6,11 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:untitled_tec_game/game/game_app.dart';
+import 'package:untitled_tec_game/game/game_app_wrapper.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const GameApp());
+    await tester.pumpWidget(const GameAppWrapper());
   });
 }

@@ -250,7 +250,7 @@
 //             groupKey: groupKey,
 //         ),
 //         iOS: DarwinNotificationDetails(
-//           threadIdentifier: 'untitled_tec_gameapp',
+//           threadIdentifier: 'untitled_tec_GameAppWrapper',
 //         ));
 //   }
 

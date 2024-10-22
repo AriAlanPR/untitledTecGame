@@ -133,7 +133,7 @@ class Dialogo {
                 Text(message!),
                 const SizedBox(width: 10),
               ],
-              LoadingAnimationWidget.twoRotatingArc(color: Colors.orange, size: 30),
+              LoadingAnimationWidget.twoRotatingArc(color: Colors.green.shade800, size: spinnerSize),
             ],
           ),
         );

@@ -10,5 +10,7 @@
     "configuracion": "Configuración",
     "ingrese_nombre": "Ingrese su nombre",
     "guardar": "Guardar",
-    "reintentar": "Reintentar"
+    "guardando": "Guardando",
+    "reintentar": "Reintentar",
+    "nombre": "Nombre"
 }

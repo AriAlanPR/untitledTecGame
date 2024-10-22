@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
 import 'package:untitled_tec_game/views/configuration_page.dart';
-import 'package:untitled_tec_game/game/game_scope.dart';
+import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/views/score_menu_page.dart';
 import 'package:untitled_tec_game/views/start_menu_page.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/navigate.dart';
 
-class GameApp extends StatefulWidget {
-  const GameApp({super.key});
+class GameAppWrapper extends StatefulWidget {
+  const GameAppWrapper({super.key});
 
   @override
-  State<GameApp> createState() => _GameAppState();
+  State<GameAppWrapper> createState() => _GameAppWrapperState();
 }
 
-class _GameAppState extends State<GameApp> with ValidateMixin {
+class _GameAppWrapperState extends State<GameAppWrapper> with ValidateMixin {
   String currentRoute = '/';
 
   Widget _gameWidget() {
-    final game = isMobile ? GameScope() : GameScope.web();
+    final game = isMobile ? TecGame() : TecGame.web();
     final gameWidget = GameWidget(
       game: game,
     );

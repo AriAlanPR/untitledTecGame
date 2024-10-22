@@ -1,6 +1,6 @@
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled_tec_game/game/game_app.dart';
+import 'package:untitled_tec_game/game/game_app_wrapper.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,5 +9,5 @@ void main() {
   //locks device to portrait view
   Flame.device.setPortrait();
 
-  runApp(const GameApp());
+  runApp(const GameAppWrapper());
 }

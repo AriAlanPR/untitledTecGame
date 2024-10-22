@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
+import 'package:untitled_tec_game/utils/persistent_data.dart';
+import 'package:untitled_tec_game/widgets/dialog.dart';
 import 'package:untitled_tec_game/widgets/easytext.dart';
+import 'package:untitled_tec_game/widgets/particles.dart';
 
 class ConfigurationPage extends StatelessWidget with ValidateMixin {
   final String defaultName = "Guest";
+  final _nombreController = TextEditingController();
 
   ConfigurationPage({
     super.key,  
@@ -47,16 +51,45 @@ class ConfigurationPage extends StatelessWidget with ValidateMixin {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Easytext(text: "ingrese_nombre".i18n(), size: 20),
-                      TextFormField(
-                        style: const TextStyle(color: Colors.white),
+                      Easytext(text: "nombre".i18n(), size: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        child: TextFormField(
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                          decoration: InputDecoration(
+                            fillColor: Colors.green.shade900.withOpacity(0.2),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          onTapOutside: (_) {
+                            FocusScope.of(context).unfocus();
+                          },
+                        ),
                       ),
+                      SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
-                          
+                        onPressed: () async {
+                          Dialogo.showLoadingDialog(context, message: "guardando".i18n());
+                          await PersistentData.save("name", _nombreController.text);
+                          if(context.mounted) {
+                            //show confetti
+                            Particles(
+                              context: context,
+                            ).showCircle();
+                            //dismiss loading
+                            Navigator.of(context).pop();
+                          }
                         },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade800,
+                        ),
                         child: Easytext(
-                          text: "Guardar".i18n(),
+                          text: "guardar".i18n(),
                           size: 15,
                         ),
                       ),

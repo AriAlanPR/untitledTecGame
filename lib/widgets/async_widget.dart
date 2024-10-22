@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
-import 'package:untitled_tec_game/widgets/empty.dart';
+import 'package:untitled_tec_game/views/empty_page.dart';
 
 class WidgetAsincrono<T> extends StatelessWidget {
   ///function that fetches the data to be displayed
