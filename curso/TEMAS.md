@@ -17,7 +17,7 @@
 - ¿Qué es un game loop?
 - Game loop en Flame (update y render).
 - Sistema de coordenadas y posicionamiento.
-- Entendiendo las coordenadas en Flame y Flutter.
+- Entendiendo las coordenadas en Flame.
 - Cómo posicionar objetos en un espacio 2D.
 - Creación de un juego básico "Hello Flame".
 - Renderización de un objeto simple (cuadrado o círculo).
@@ -65,6 +65,6 @@
 - Conocimientos de paqueterias.
 - Manejo de pubspec.yaml .
 - Flutter con Android, iOS y Web.
+- Compilar para Android / iOS.
 - Repaso de conceptos clave.
 - Resolver dudas pendientes.
-- Discutir los próximos pasos para los interesados en profundizar en el desarrollo.
