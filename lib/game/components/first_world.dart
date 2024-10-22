@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled_tec_game/game/components/character.dart';
+import 'package:untitled_tec_game/game/components/enemy.dart';
 import 'package:untitled_tec_game/game/components/player.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 
@@ -33,7 +33,7 @@ class FirstWorld extends World with HasGameRef<TecGame>{
         color: color ?? Colors.red,
       ));
     } else {
-      add(Character(
+      add(Enemy(
         position: Vector2(x, y),
         radius: 20,
         color: color ?? Colors.blue,
