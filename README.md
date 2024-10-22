@@ -29,3 +29,5 @@ flutter_icons:
 `dart run flutter_launcher_icons`
 - [ ] [documentacion](https://pub.dev/packages/flutter_launcher_icons)
 
+### Fuentes de información
+- [ ] [más sobre flame](https://docs.flame-engine.org)

@@ -2,15 +2,14 @@
 ## Sesión 1: Entendiendo los Fundamentos del Desarrollo de Juegos 2D 
 
 ### Visión general del desarrollo de videojuegos
-- ¿Qué compone un juego? Componentes, game loop, recursos e interacciones de usuario.
 - Introducción a los juegos 2D y por qué usar Flutter para su desarrollo.
 - Ejemplos de juegos 2D simples.
-- Introducción a Flutter Flame.
-- Descripción general de Flame: un motor de juegos liviano para Flutter.
+- Introducción a Flutter Flame: un motor de juegos liviano para Flutter.
 - Comparativa Flame vs Unity (ventajas para juegos móviles o proyectos simples).
-- Configuración de Flame en un proyecto de Flutter.
+- ¿Qué compone un juego? Componentes, game loop, recursos e interacciones de usuario.
 - Instalación de dependencias.
 - Descripción de la estructura del proyecto.
+- Configuración de Flame en un proyecto de Flutter.
 
 ## Sesión 2: Conceptos Básicos de Flame 
 
@@ -22,7 +21,6 @@
 - Cómo posicionar objetos en un espacio 2D.
 - Creación de un juego básico "Hello Flame".
 - Renderización de un objeto simple (cuadrado o círculo).
-- Movimiento del objeto utilizando interacciones de usuario (arrastrar o tocar).
 
 # Día 2: Sprites, Componentes e Interacción 
 ## Sesión 3: Trabajo con Sprites y Animaciones 
@@ -40,7 +38,7 @@
 - Añadiendo interacciones de tipo táctil/clic a los elementos del juego.
 - Creación de un personaje controlado por el jugador.
 - Moviendo el personaje con gestos (arrastrar o tocar).
-- Detección básica de colisiones (por ejemplo, cuando el jugador golpea un objeto).
+- Detección básica de colisiones.
 
 # Día 3: Mecánicas de Juego y Construcción de un Juego Simple 
 ## Sesión 5: Componentes del Juego y Física Básica 
