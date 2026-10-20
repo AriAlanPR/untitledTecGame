@@ -12,5 +12,11 @@
     "guardar": "Save",
     "guardando": "Saving",
     "reintentar": "Retry",
-    "nombre": "Name"
+    "nombre": "Name",
+    "vidas": "Lives",
+    "puntaje": "Score",
+    "fin_del_juego": "Game Over",
+    "puntaje_final": "Final Score",
+    "reiniciar": "Play Again",
+    "menu_principal": "Main Menu"
 }

@@ -62,6 +62,9 @@ class TecGame extends FlameGame with HasCollisionDetection {
     isGameOver = false;
     scoreNotifier.value = 0;
     livesNotifier.value = 3;
+    if (world is FirstWorld) {
+      (world as FirstWorld).reset();
+    }
     resumeEngine();
     overlays.remove('gameOver');
   }

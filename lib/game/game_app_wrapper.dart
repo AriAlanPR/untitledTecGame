@@ -4,6 +4,8 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
+import 'package:untitled_tec_game/game/overlays/game_hud_overlay.dart';
+import 'package:untitled_tec_game/game/overlays/game_over_overlay.dart';
 import 'package:untitled_tec_game/views/configuration_page.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
@@ -24,8 +26,13 @@ class _GameAppWrapperState extends State<GameAppWrapper> with ValidateMixin {
 
   Widget _gameWidget() {
     final game = isMobile ? TecGame() : TecGame.web();
-    final gameWidget = GameWidget(
+    final gameWidget = GameWidget<TecGame>(
       game: game,
+      initialActiveOverlays: const ['hud'],
+      overlayBuilderMap: {
+        'hud': (context, game) => GameHudOverlay(game: game),
+        'gameOver': (context, game) => GameOverOverlay(game: game),
+      },
     );
 
     return isMobile

@@ -12,5 +12,11 @@
     "guardar": "Guardar",
     "guardando": "Guardando",
     "reintentar": "Reintentar",
-    "nombre": "Nombre"
+    "nombre": "Nombre",
+    "vidas": "Vidas",
+    "puntaje": "Puntaje",
+    "fin_del_juego": "Fin del Juego",
+    "puntaje_final": "Puntaje Final",
+    "reiniciar": "Jugar de nuevo",
+    "menu_principal": "Menú Principal"
 }

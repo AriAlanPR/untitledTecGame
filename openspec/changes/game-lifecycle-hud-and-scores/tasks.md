@@ -8,9 +8,9 @@
 
 ## 2. HUD en Tiempo Real y Pantalla de Game Over
 
-- [ ] 2.1 Crear widget `GameHudOverlay` con visualizador reactivo de vidas y puntaje
-- [ ] 2.2 Crear widget `GameOverOverlay` con puntaje final, botón de reinicio y botón hacia puntuaciones
-- [ ] 2.3 Registrar overlays en `GameWidget` dentro de `lib/game/game_app_wrapper.dart`
+- [x] 2.1 Crear widget `GameHudOverlay` con visualizador reactivo de vidas y puntaje
+- [x] 2.2 Crear widget `GameOverOverlay` con puntaje final, botón de reinicio y botón hacia puntuaciones
+- [x] 2.3 Registrar overlays en `GameWidget` dentro de `lib/game/game_app_wrapper.dart`
 
 ## 3. Persistencia del Top 10 y Pantalla de Puntuaciones
 
