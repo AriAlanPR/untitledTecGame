@@ -10,18 +10,23 @@ class TecGame extends FlameGame {
   TecGame({
     super.children,
     this.bgColor = AppColors.navy,
-  }): super(
-    world: FirstWorld(),
-  );
+  }) : super(
+          world: FirstWorld(),
+          camera: CameraComponent.withFixedResolution(
+            width: gameWidth,
+            height: gameHeight,
+          )..viewfinder.anchor = Anchor.topLeft,
+        );
 
   TecGame.web({
     this.bgColor = AppColors.navy,
   }) : super(
-        camera: CameraComponent.withFixedResolution(
-          width: gameWidth,
-          height: gameHeight,
           world: FirstWorld(),
-        ));
+          camera: CameraComponent.withFixedResolution(
+            width: gameWidth,
+            height: gameHeight,
+          )..viewfinder.anchor = Anchor.topLeft,
+        );
 
   @override
   Color backgroundColor() {
