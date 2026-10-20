@@ -9,9 +9,9 @@
 
 ## 2. Generación de Asteroides y Bucle de Spawn
 
-- [ ] 2.1 Crear `AsteroidComponent` con animación `"woosh"` de `effects_skills.png` (34x34) y rotación angular
-- [ ] 2.2 Implementar `AsteroidSpawner` periódico (spawn perimétrico aleatorio con velocidades lineales)
-- [ ] 2.3 Implementar reciclaje y remoción de asteroides fuera de los límites del viewport
+- [x] 2.1 Crear `AsteroidComponent` con animación `"woosh"` de `effects_skills.png` (34x34) y rotación angular
+- [x] 2.2 Implementar `AsteroidSpawner` periódico (spawn perimétrico aleatorio con velocidades lineales)
+- [x] 2.3 Implementar reciclaje y remoción de asteroides fuera de los límites del viewport
 
 ## 3. Detección de Colisiones y Puntuación
 
