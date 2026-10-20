@@ -11,6 +11,14 @@ class AsteroidComponent extends SpriteAnimationComponent
 
   final Vector2 velocity;
   final double torque;
+  bool _isDestroyed = false;
+
+  bool get isDestroyed => _isDestroyed;
+  bool get isOutOfBounds =>
+      position.x < -150 ||
+      position.x > gameWidth + 150 ||
+      position.y < -150 ||
+      position.y > gameHeight + 150;
 
   AsteroidComponent({
     required Vector2 position,
@@ -21,6 +29,12 @@ class AsteroidComponent extends SpriteAnimationComponent
           size: Vector2.all(baseSize),
           anchor: Anchor.center,
         );
+
+  void hitByLaser() {
+    if (_isDestroyed) return;
+    _isDestroyed = true;
+    removeFromParent();
+  }
 
   @override
   Future<void> onLoad() async {
@@ -50,11 +64,7 @@ class AsteroidComponent extends SpriteAnimationComponent
     position += velocity * dt;
     angle += torque * dt;
 
-    // Off-screen recycling (>100px past viewport margin)
-    if (position.x < -150 ||
-        position.x > gameWidth + 150 ||
-        position.y < -150 ||
-        position.y > gameHeight + 150) {
+    if (isOutOfBounds) {
       removeFromParent();
     }
   }

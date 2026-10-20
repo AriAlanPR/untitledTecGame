@@ -15,7 +15,7 @@
 
 ## 3. Detección de Colisiones y Puntuación
 
-- [ ] 3.1 Habilitar `HasCollisionDetection` en `GameScope`
-- [ ] 3.2 Agregar `RectangleHitbox` a `LaserComponent` y `CircleHitbox` a `AsteroidComponent`
-- [ ] 3.3 Resolver colisión láser-asteroide en `CollisionCallbacks`: destrucción de ambas entidades e incremento de +100 puntos
-- [ ] 3.4 Escribir tests unitarios de paridad para los escenarios de la spec
+- [x] 3.1 Habilitar `HasCollisionDetection` en `GameScope`
+- [x] 3.2 Agregar `RectangleHitbox` a `LaserComponent` y `CircleHitbox` a `AsteroidComponent`
+- [x] 3.3 Resolver colisión láser-asteroide en `CollisionCallbacks`: destrucción de ambas entidades e incremento de +100 puntos
+- [x] 3.4 Escribir tests unitarios de paridad para los escenarios de la spec

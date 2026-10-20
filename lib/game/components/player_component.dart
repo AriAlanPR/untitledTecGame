@@ -17,8 +17,20 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   static const double maxX = gameWidth - (playerWidth / 2);
 
   double _shotTimer = 0.0;
+  PlayerState _state = PlayerState.idle;
+
+  PlayerState get playerState => _state;
+
+  set playerState(PlayerState newState) {
+    _state = newState;
+    if (animations != null) {
+      current = newState;
+    }
+  }
 
   PlayerComponent({
+    super.animations,
+    super.current,
     Vector2? position,
   }) : super(
           position: position ?? Vector2(gameWidth / 2, gameHeight - 250),
@@ -30,49 +42,51 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final image = await gameRef.images.load('character1.png');
-    final spriteSheet = SpriteSheet(
-      image: image,
-      srcSize: Vector2(64, 64),
-    );
+    if (animations == null || animations!.isEmpty) {
+      final image = await gameRef.images.load('character1.png');
+      final spriteSheet = SpriteSheet(
+        image: image,
+        srcSize: Vector2(64, 64),
+      );
 
-    // Frame indices from TecISC/helpers/character1.lua (0-based)
-    // idle: first frame
-    final idleAnimation = SpriteAnimation.spriteList(
-      [spriteSheet.getSpriteById(0)],
-      stepTime: 1.0,
-      loop: true,
-    );
+      // Frame indices from TecISC/helpers/character1.lua (0-based)
+      // idle: first frame
+      final idleAnimation = SpriteAnimation.spriteList(
+        [spriteSheet.getSpriteById(0)],
+        stepTime: 1.0,
+        loop: true,
+      );
 
-    // left: frames 69..76 (count 8, 600ms)
-    final leftAnimation = SpriteAnimation.spriteList(
-      [for (int i = 69; i < 69 + 8; i++) spriteSheet.getSpriteById(i)],
-      stepTime: 0.6 / 8,
-      loop: true,
-    );
+      // left: frames 69..76 (count 8, 600ms)
+      final leftAnimation = SpriteAnimation.spriteList(
+        [for (int i = 69; i < 69 + 8; i++) spriteSheet.getSpriteById(i)],
+        stepTime: 0.6 / 8,
+        loop: true,
+      );
 
-    // right: frames 87..94 (count 8, 600ms)
-    final rightAnimation = SpriteAnimation.spriteList(
-      [for (int i = 87; i < 87 + 8; i++) spriteSheet.getSpriteById(i)],
-      stepTime: 0.6 / 8,
-      loop: true,
-    );
+      // right: frames 87..94 (count 8, 600ms)
+      final rightAnimation = SpriteAnimation.spriteList(
+        [for (int i = 87; i < 87 + 8; i++) spriteSheet.getSpriteById(i)],
+        stepTime: 0.6 / 8,
+        loop: true,
+      );
 
-    // shot: frames 122..132 (count 11, 600ms)
-    final shotAnimation = SpriteAnimation.spriteList(
-      [for (int i = 122; i < 122 + 11; i++) spriteSheet.getSpriteById(i)],
-      stepTime: 0.6 / 11,
-      loop: false,
-    );
+      // shot: frames 122..132 (count 11, 600ms)
+      final shotAnimation = SpriteAnimation.spriteList(
+        [for (int i = 122; i < 122 + 11; i++) spriteSheet.getSpriteById(i)],
+        stepTime: 0.6 / 11,
+        loop: false,
+      );
 
-    animations = {
-      PlayerState.idle: idleAnimation,
-      PlayerState.left: leftAnimation,
-      PlayerState.right: rightAnimation,
-      PlayerState.shot: shotAnimation,
-    };
+      animations = {
+        PlayerState.idle: idleAnimation,
+        PlayerState.left: leftAnimation,
+        PlayerState.right: rightAnimation,
+        PlayerState.shot: shotAnimation,
+      };
 
-    current = PlayerState.idle;
+      playerState = PlayerState.idle;
+    }
 
     add(CircleHitbox(radius: 40, anchor: Anchor.center, position: size / 2));
   }
@@ -81,25 +95,29 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   void update(double dt) {
     super.update(dt);
 
-    if (current == PlayerState.shot) {
+    if (_state == PlayerState.shot) {
       _shotTimer += dt;
       if (_shotTimer >= 0.6) {
         _shotTimer = 0.0;
-        current = PlayerState.idle;
+        playerState = PlayerState.idle;
       }
     }
   }
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
-    position.x += event.localDelta.x;
+    dragBy(event.localDelta.x);
+  }
+
+  void dragBy(double deltaX) {
+    position.x += deltaX;
     position.x = position.x.clamp(minX, maxX);
 
-    if (current != PlayerState.shot) {
-      if (event.localDelta.x < -0.5) {
-        current = PlayerState.left;
-      } else if (event.localDelta.x > 0.5) {
-        current = PlayerState.right;
+    if (_state != PlayerState.shot) {
+      if (deltaX < -0.5) {
+        playerState = PlayerState.left;
+      } else if (deltaX > 0.5) {
+        playerState = PlayerState.right;
       }
     }
   }
@@ -107,16 +125,16 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   @override
   void onDragEnd(DragEndEvent event) {
     super.onDragEnd(event);
-    if (current != PlayerState.shot) {
-      current = PlayerState.idle;
+    if (_state != PlayerState.shot) {
+      playerState = PlayerState.idle;
     }
   }
 
   @override
   void onDragCancel(DragCancelEvent event) {
     super.onDragCancel(event);
-    if (current != PlayerState.shot) {
-      current = PlayerState.idle;
+    if (_state != PlayerState.shot) {
+      playerState = PlayerState.idle;
     }
   }
 
@@ -126,7 +144,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void fireLaser() {
-    current = PlayerState.shot;
+    playerState = PlayerState.shot;
     _shotTimer = 0.0;
 
     final laser = LaserComponent(
