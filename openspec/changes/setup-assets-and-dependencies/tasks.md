@@ -2,9 +2,9 @@
 
 ## 1. Resolver dependencias y agregar soporte de audio
 
-- [ ] 1.1 Actualizar la restricción de `intl` a `^0.20.3` en `pubspec.yaml`
-- [ ] 1.2 Agregar `flame_audio: ^2.1.9` a `dependencies` en `pubspec.yaml`
-- [ ] 1.3 Ejecutar `flutter pub get` y verificar resolución limpia de paquetes
+- [x] 1.1 Actualizar la restricción de `intl` a `^0.20.3` en `pubspec.yaml`
+- [x] 1.2 Agregar `flame_audio: ^2.1.9` a `dependencies` en `pubspec.yaml`
+- [x] 1.3 Ejecutar `flutter pub get` y verificar resolución limpia de paquetes
 
 ## 2. Migrar y registrar assets gráficos de TecISC
 
