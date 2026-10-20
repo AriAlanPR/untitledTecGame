@@ -18,8 +18,16 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
 
   double _shotTimer = 0.0;
   PlayerState _state = PlayerState.idle;
+  bool _isInvulnerable = false;
+  double _invulnerabilityTimer = 0.0;
+  static const double invulnerabilityDuration = 2.5;
+  double _blinkTimer = 0.0;
+  static const double blinkInterval = 0.15;
+  final TecGame? customGame;
 
+  bool get isInvulnerable => _isInvulnerable;
   PlayerState get playerState => _state;
+  TecGame get effectiveGame => customGame ?? gameRef;
 
   set playerState(PlayerState newState) {
     _state = newState;
@@ -32,11 +40,23 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     super.animations,
     super.current,
     Vector2? position,
+    this.customGame,
   }) : super(
           position: position ?? Vector2(gameWidth / 2, gameHeight - 250),
           size: Vector2(playerWidth, playerHeight),
           anchor: Anchor.center,
         );
+
+  void takeDamage() {
+    if (_isInvulnerable) return;
+
+    final damaged = effectiveGame.takeDamage();
+    if (damaged) {
+      _isInvulnerable = true;
+      _invulnerabilityTimer = 0.0;
+      _blinkTimer = 0.0;
+    }
+  }
 
   @override
   Future<void> onLoad() async {
@@ -100,6 +120,22 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
       if (_shotTimer >= 0.6) {
         _shotTimer = 0.0;
         playerState = PlayerState.idle;
+      }
+    }
+
+    if (_isInvulnerable) {
+      _invulnerabilityTimer += dt;
+      _blinkTimer += dt;
+
+      if (_blinkTimer >= blinkInterval) {
+        _blinkTimer = 0.0;
+        opacity = (opacity == 1.0) ? 0.3 : 1.0;
+      }
+
+      if (_invulnerabilityTimer >= invulnerabilityDuration) {
+        _isInvulnerable = false;
+        _invulnerabilityTimer = 0.0;
+        opacity = 1.0;
       }
     }
   }

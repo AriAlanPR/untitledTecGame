@@ -1,6 +1,4 @@
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:untitled_tec_game/game/components/asteroid_component.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';

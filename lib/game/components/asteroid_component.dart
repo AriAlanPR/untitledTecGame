@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
+import 'package:untitled_tec_game/game/components/player_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
 
@@ -12,8 +13,10 @@ class AsteroidComponent extends SpriteAnimationComponent
   final Vector2 velocity;
   final double torque;
   bool _isDestroyed = false;
+  final TecGame? customGame;
 
   bool get isDestroyed => _isDestroyed;
+  TecGame get effectiveGame => customGame ?? gameRef;
   bool get isOutOfBounds =>
       position.x < -150 ||
       position.x > gameWidth + 150 ||
@@ -24,6 +27,7 @@ class AsteroidComponent extends SpriteAnimationComponent
     required Vector2 position,
     required this.velocity,
     this.torque = 0.0,
+    this.customGame,
   }) : super(
           position: position,
           size: Vector2.all(baseSize),
@@ -34,6 +38,22 @@ class AsteroidComponent extends SpriteAnimationComponent
     if (_isDestroyed) return;
     _isDestroyed = true;
     removeFromParent();
+  }
+
+  @override
+  void onCollisionStart(
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
+    super.onCollisionStart(intersectionPoints, other);
+    if (_isDestroyed) return;
+
+    if (other is PlayerComponent) {
+      if (!other.isInvulnerable) {
+        hitByLaser();
+        other.takeDamage();
+      }
+    }
   }
 
   @override

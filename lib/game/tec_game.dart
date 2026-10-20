@@ -7,7 +7,12 @@ import 'package:untitled_tec_game/utils/constants.dart';
 
 class TecGame extends FlameGame with HasCollisionDetection {
   final Color bgColor;
-  int score = 0;
+  final ValueNotifier<int> scoreNotifier = ValueNotifier<int>(0);
+  final ValueNotifier<int> livesNotifier = ValueNotifier<int>(3);
+  bool isGameOver = false;
+
+  int get score => scoreNotifier.value;
+  int get lives => livesNotifier.value;
 
   TecGame({
     super.children,
@@ -31,7 +36,34 @@ class TecGame extends FlameGame with HasCollisionDetection {
         );
 
   void addScore(int points) {
-    score += points;
+    scoreNotifier.value += points;
+  }
+
+  bool takeDamage() {
+    if (isGameOver) return false;
+    if (livesNotifier.value > 0) {
+      livesNotifier.value -= 1;
+      if (livesNotifier.value <= 0) {
+        triggerGameOver();
+      }
+      return true;
+    }
+    return false;
+  }
+
+  void triggerGameOver() {
+    if (isGameOver) return;
+    isGameOver = true;
+    pauseEngine();
+    overlays.add('gameOver');
+  }
+
+  void resetGame() {
+    isGameOver = false;
+    scoreNotifier.value = 0;
+    livesNotifier.value = 3;
+    resumeEngine();
+    overlays.remove('gameOver');
   }
 
   @override
