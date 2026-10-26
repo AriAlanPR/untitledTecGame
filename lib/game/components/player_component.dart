@@ -60,6 +60,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
       _invulnerabilityTimer = 0.0;
       _blinkTimer = 0.0;
       AudioManager.instance.playDamage();
+      effectiveGame.shakeScreen();
     }
   }
 

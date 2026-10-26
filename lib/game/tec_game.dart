@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,52 @@ class TecGame extends FlameGame with HasCollisionDetection {
 
   int get score => scoreNotifier.value;
   int get lives => livesNotifier.value;
+
+  double _shakeTimer = 0.0;
+  double _shakeDuration = 0.0;
+  double _shakeIntensity = 0.0;
+  final Random _random = Random();
+  bool _isHitStopping = false;
+
+  bool get isShaking => _shakeTimer > 0;
+  bool get isHitStopping => _isHitStopping;
+
+  void shakeScreen({double duration = 0.3, double intensity = 15.0}) {
+    _shakeDuration = duration;
+    _shakeTimer = duration;
+    _shakeIntensity = intensity;
+  }
+
+  void hitStop([int milliseconds = 45]) {
+    if (_isHitStopping || isGameOver) return;
+    _isHitStopping = true;
+    pauseEngine();
+    Future.delayed(Duration(milliseconds: milliseconds), () {
+      _isHitStopping = false;
+      if (!isGameOver) {
+        resumeEngine();
+      }
+    });
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    if (_shakeTimer > 0) {
+      _shakeTimer -= dt;
+      if (_shakeTimer <= 0) {
+        _shakeTimer = 0.0;
+        camera.viewfinder.position = Vector2.zero();
+      } else {
+        final progress = _shakeTimer / _shakeDuration;
+        final currentIntensity = _shakeIntensity * progress;
+        final offsetX = (_random.nextDouble() * 2 - 1) * currentIntensity;
+        final offsetY = (_random.nextDouble() * 2 - 1) * currentIntensity;
+        camera.viewfinder.position = Vector2(offsetX, offsetY);
+      }
+    }
+  }
 
   TecGame({
     super.children,
@@ -74,6 +121,8 @@ class TecGame extends FlameGame with HasCollisionDetection {
 
   void resetGame() {
     isGameOver = false;
+    _shakeTimer = 0.0;
+    camera.viewfinder.position = Vector2.zero();
     scoreNotifier.value = 0;
     livesNotifier.value = 3;
     if (world is FirstWorld) {

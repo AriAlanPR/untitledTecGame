@@ -8,9 +8,9 @@
 
 ## 2. Game Feel: Screen Shake y Hit Stop en el Motor
 
-- [ ] 2.1 Implementar efecto de `shakeScreen()` en `TecGame` usando el viewfinder de la cámara
-- [ ] 2.2 Implementar micro-pausa de impacto (`hitStop()`) ante colisiones destructivas
-- [ ] 2.3 Vincular daño del jugador con `shakeScreen()` y colisión de láser con `hitStop()`
+- [x] 2.1 Implementar efecto de `shakeScreen()` en `TecGame` usando el viewfinder de la cámara
+- [x] 2.2 Implementar micro-pausa de impacto (`hitStop()`) ante colisiones destructivas
+- [x] 2.3 Vincular daño del jugador con `shakeScreen()` y colisión de láser con `hitStop()`
 
 ## 3. UI del Selector de Naves y Tests de Paridad
 
