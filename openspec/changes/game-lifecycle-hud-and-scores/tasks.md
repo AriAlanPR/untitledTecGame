@@ -14,7 +14,7 @@
 
 ## 3. Persistencia del Top 10 y Pantalla de Puntuaciones
 
-- [ ] 3.1 Agregar métodos `getHighScores()` y `saveHighScore()` en `lib/utils/persistent_data.dart`
-- [ ] 3.2 Conectar `ScoreMenuPage` para cargar y mostrar los 10 puntajes reales desde `PersistentData`
-- [ ] 3.3 Guardar el puntaje final en `PersistentData` al detonar Game Over en `TecGame`
-- [ ] 3.4 Escribir tests unitarios de paridad para los escenarios de la spec
+- [x] 3.1 Agregar métodos `getHighScores()` y `saveHighScore()` en `lib/utils/persistent_data.dart`
+- [x] 3.2 Conectar `ScoreMenuPage` para cargar y mostrar los 10 puntajes reales desde `PersistentData`
+- [x] 3.3 Guardar el puntaje final en `PersistentData` al detonar Game Over en `TecGame`
+- [x] 3.4 Escribir tests unitarios de paridad para los escenarios de la spec

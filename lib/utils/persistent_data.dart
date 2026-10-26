@@ -1,8 +1,55 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
 
 class PersistentData {
   static SharedPreferences? preferences;
+  static const String highScoresKey = 'high_scores';
+
+  /// Retrieves the top 10 high scores in descending order.
+  /// If no scores exist yet, returns a list of 10 zeros.
+  static Future<List<int>> getHighScores() async {
+    try {
+      if (preferences == null) {
+        await init();
+      }
+      final raw = preferences?.getString(highScoresKey);
+      if (raw == null) {
+        return List<int>.filled(10, 0);
+      }
+      final decoded = jsonDecode(raw);
+      if (decoded is List) {
+        final list = decoded.map((e) => (e as num).toInt()).toList();
+        list.sort((a, b) => b.compareTo(a));
+        if (list.length < 10) {
+          list.addAll(List<int>.filled(10 - list.length, 0));
+        }
+        return list.take(10).toList();
+      }
+      return List<int>.filled(10, 0);
+    } catch (e) {
+      return List<int>.filled(10, 0);
+    }
+  }
+
+  /// Adds [score] to the high scores list, sorts descending, keeps the top 10,
+  /// and saves to persistent storage.
+  static Future<List<int>> saveHighScore(int score) async {
+    try {
+      final current = await getHighScores();
+      final updated = List<int>.from(current)..add(score);
+      updated.sort((a, b) => b.compareTo(a));
+      final top10 = updated.take(10).toList();
+
+      if (preferences == null) {
+        await init();
+      }
+      await preferences?.setString(highScoresKey, jsonEncode(top10));
+      return top10;
+    } catch (e) {
+      return List<int>.filled(10, 0);
+    }
+  }
 
   /// Initializes the shared preferences instance for persistent data storage.
   ///
@@ -143,12 +190,12 @@ class PersistentData {
   /// successfully cleared, and `false` otherwise.
   static Future<bool> clear() async {
     try {
-      final result = preferences!.clear();
+      final result = await preferences!.clear();
       println("clear result: $result");
 
       return result;
     } catch (e) {
       return false;
     }
-}
+  }
 }

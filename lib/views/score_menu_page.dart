@@ -2,18 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
+import 'package:untitled_tec_game/utils/persistent_data.dart';
 import 'package:untitled_tec_game/widgets/easytext.dart';
 
 class ScoreMenuPage extends StatelessWidget with ValidateMixin {
-  final List<int> scores;
+  final List<int>? scores;
+
   ScoreMenuPage({
     super.key,
-    this.scores = const [0,0,0,0,0,0,0,0,0,0],
+    this.scores,
   });
 
-  //TODO - keep latest 10 scores
   @override
   Widget build(BuildContext context) {
+    if (scores != null) {
+      return _buildContent(context, scores!);
+    }
+
+    return FutureBuilder<List<int>>(
+      future: PersistentData.getHighScores(),
+      builder: (context, snapshot) {
+        final data = snapshot.data ?? const [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        return _buildContent(context, data);
+      },
+    );
+  }
+
+  Widget _buildContent(BuildContext context, List<int> displayScores) {
     return Scaffold(
       appBar: AppBar(
         title: Easytext(text: "puntajes".i18n(), size: 40),
@@ -31,9 +46,9 @@ class ScoreMenuPage extends StatelessWidget with ValidateMixin {
               gradient: LinearGradient(
                 colors: [
                   Colors.grey.shade800,
-                  Colors.grey.shade600.withOpacity(0.7),
-                  Colors.blueGrey.shade800.withOpacity(0.7),
-                  Colors.blueGrey.shade600.withOpacity(0.7)
+                  Colors.grey.shade600.withValues(alpha: 0.7),
+                  Colors.blueGrey.shade800.withValues(alpha: 0.7),
+                  Colors.blueGrey.shade600.withValues(alpha: 0.7)
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -42,9 +57,18 @@ class ScoreMenuPage extends StatelessWidget with ValidateMixin {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 20),
-                ...scores.map((score) => Easytext(text: score.toString())),
-                SizedBox(height: 80),
+                const SizedBox(height: 20),
+                ...displayScores.map(
+                  (score) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Easytext(
+                      text: score.toString(),
+                      size: 26,
+                      bold: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 80),
               ],
             ),
           ),

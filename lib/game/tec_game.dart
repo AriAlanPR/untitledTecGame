@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game/components/first_world.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
+import 'package:untitled_tec_game/utils/persistent_data.dart';
 
 class TecGame extends FlameGame with HasCollisionDetection {
   final Color bgColor;
@@ -54,8 +56,13 @@ class TecGame extends FlameGame with HasCollisionDetection {
   void triggerGameOver() {
     if (isGameOver) return;
     isGameOver = true;
+    unawaited(PersistentData.saveHighScore(score));
     pauseEngine();
-    overlays.add('gameOver');
+    try {
+      overlays.add('gameOver');
+    } catch (_) {
+      // Overlays are only registered when GameWidget mounts the game
+    }
   }
 
   void resetGame() {
@@ -66,7 +73,11 @@ class TecGame extends FlameGame with HasCollisionDetection {
       (world as FirstWorld).reset();
     }
     resumeEngine();
-    overlays.remove('gameOver');
+    try {
+      overlays.remove('gameOver');
+    } catch (_) {
+      // Overlays are only registered when GameWidget mounts the game
+    }
   }
 
   @override
