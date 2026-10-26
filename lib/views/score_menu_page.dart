@@ -60,15 +60,16 @@ class ScoreMenuPage extends StatelessWidget with ValidateMixin {
         child: Column(
           children: [
             Expanded(
-              child: ListView.separated(
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                itemCount: displayScores.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 8),
-                itemBuilder: (context, index) {
-                  final rank = index + 1;
-                  final score = displayScores[index];
-                  return _buildScoreCard(context, rank, score);
-                },
+                child: Column(
+                  children: [
+                    for (int i = 0; i < displayScores.length; i++) ...[
+                      if (i > 0) const SizedBox(height: 8),
+                      _buildScoreCard(context, i + 1, displayScores[i]),
+                    ],
+                  ],
+                ),
               ),
             ),
             Container(

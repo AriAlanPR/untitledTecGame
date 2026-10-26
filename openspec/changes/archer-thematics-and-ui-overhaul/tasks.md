@@ -14,7 +14,7 @@
 
 ## 3. Renovación Visual de StartMenu, ConfigurationPage y Tests de Paridad
 
-- [ ] 3.1 Renovar `ConfigurationPage` con sliders porcentuales y componentes estilizados con tokens de tema
-- [ ] 3.2 Renovar `StartMenu` con botones arcade de neón, mejor espaciado y micro-interacciones suaves
-- [ ] 3.3 Mantener simetría de i18n en `es_MX.json` y `en_US.json`
-- [ ] 3.4 Escribir tests de paridad estricta para los 5 escenarios en `test/archer_and_ui_test.dart`
+- [x] 3.1 Renovar `ConfigurationPage` con sliders porcentuales y componentes estilizados con tokens de tema
+- [x] 3.2 Renovar `StartMenu` con botones arcade de neón, mejor espaciado y micro-interacciones suaves
+- [x] 3.3 Mantener simetría de i18n en `es_MX.json` y `en_US.json`
+- [x] 3.4 Escribir tests de paridad estricta para los 5 escenarios en `test/archer_and_ui_test.dart`

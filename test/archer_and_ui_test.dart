@@ -7,6 +7,7 @@ import 'package:untitled_tec_game/game/components/player_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
+import 'package:untitled_tec_game/views/configuration_page.dart';
 import 'package:untitled_tec_game/views/score_menu_page.dart';
 import 'package:flame/extensions.dart';
 
@@ -82,6 +83,22 @@ void main() {
       for (final s in scores) {
         expect(find.text(s.toString()), findsOneWidget);
       }
+    });
+
+    testWidgets('Configuration page renders styled audio and profile controls', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: ConfigurationPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('config_player_name_field')), findsOneWidget);
+      expect(find.byKey(const Key('config_save_name_btn')), findsOneWidget);
+      expect(find.byKey(const Key('config_bgm_switch')), findsOneWidget);
+      expect(find.byKey(const Key('config_sfx_switch')), findsOneWidget);
+      expect(find.byKey(const Key('config_bgm_slider')), findsOneWidget);
+      expect(find.byKey(const Key('config_sfx_slider')), findsOneWidget);
     });
   });
 }

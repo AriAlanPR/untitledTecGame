@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
-import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
 import 'package:untitled_tec_game/widgets/how_to_play_dialog.dart';
 import 'package:untitled_tec_game/widgets/particles.dart';
@@ -81,38 +80,45 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
           ),
           ElevatedButton(
             //NOTE - jugar
+            key: const Key('start_menu_play_btn'),
             onPressed: onStart,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
-              elevation: 5,
+              shadowColor: Colors.transparent,
+              padding: EdgeInsets.zero,
             ),
             child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 12),
               decoration: BoxDecoration(
-                borderRadius: CoolBorders(
-                  borderDesign: BorderDesign.all,
-                  radius: 40,
-                ).getRadius,
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.green.shade300.withValues(alpha: defaultButtonOpacity),
-                    Colors.green.shade200,
-                    Colors.green.shade100,
-                    Colors.white.withValues(alpha: defaultButtonOpacity)
-                  ],
+                borderRadius: BorderRadius.circular(30),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF00E676), Color(0xFF00B0FF)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF00E676).withValues(alpha: 0.5),
+                    blurRadius: 16,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-              child: Padding(
-                //icono de jugar
-                padding: const EdgeInsets.symmetric(
-                  vertical: 4.0,
-                  horizontal: 48.0,
-                ),
-                child: Icon(
-                  Icons.play_arrow,
-                  size: height * 0.08,
-                ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.play_arrow_rounded, color: Colors.black87, size: 36),
+                  const SizedBox(width: 8),
+                  Text(
+                    "JUGAR",
+                    style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2.0,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
