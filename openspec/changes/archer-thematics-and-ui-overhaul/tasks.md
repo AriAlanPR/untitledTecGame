@@ -8,9 +8,9 @@
 
 ## 2. Navegación y Renovación Visual de ScoreMenuPage
 
-- [ ] 2.1 Añadir botón «Menú Principal» en `ScoreMenuPage` para regresar limpiamente a la pantalla de inicio
-- [ ] 2.2 Rediseñar la presentación de puntajes con podio y medallas (oro, plata, bronce) para el top 3
-- [ ] 2.3 Estilizar las tarjetas de puntuación con tokens de tema (`Theme.of(context)`) sin colores fijos
+- [x] 2.1 Añadir botón «Menú Principal» en `ScoreMenuPage` para regresar limpiamente a la pantalla de inicio
+- [x] 2.2 Rediseñar la presentación de puntajes con podio y medallas (oro, plata, bronce) para el top 3
+- [x] 2.3 Estilizar las tarjetas de puntuación con tokens de tema (`Theme.of(context)`) sin colores fijos
 
 ## 3. Renovación Visual de StartMenu, ConfigurationPage y Tests de Paridad
 
