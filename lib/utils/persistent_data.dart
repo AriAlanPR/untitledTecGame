@@ -5,6 +5,86 @@ import 'package:untitled_tec_game/utils/log_handler.dart';
 class PersistentData {
   static SharedPreferences? preferences;
   static const String highScoresKey = 'high_scores';
+  static const String bgmEnabledKey = 'bgm_enabled';
+  static const String sfxEnabledKey = 'sfx_enabled';
+  static const String bgmVolumeKey = 'bgm_volume';
+  static const String sfxVolumeKey = 'sfx_volume';
+
+  static Future<bool> getBgmEnabled() async {
+    try {
+      if (preferences == null) await init();
+      return preferences?.getBool(bgmEnabledKey) ?? true;
+    } catch (_) {
+      return true;
+    }
+  }
+
+  static Future<bool> setBgmEnabled(bool value) async {
+    try {
+      if (preferences == null) await init();
+      await preferences?.setBool(bgmEnabledKey, value);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static Future<bool> getSfxEnabled() async {
+    try {
+      if (preferences == null) await init();
+      return preferences?.getBool(sfxEnabledKey) ?? true;
+    } catch (_) {
+      return true;
+    }
+  }
+
+  static Future<bool> setSfxEnabled(bool value) async {
+    try {
+      if (preferences == null) await init();
+      await preferences?.setBool(sfxEnabledKey, value);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static Future<double> getBgmVolume() async {
+    try {
+      if (preferences == null) await init();
+      return preferences?.getDouble(bgmVolumeKey) ?? 0.7;
+    } catch (_) {
+      return 0.7;
+    }
+  }
+
+  static Future<bool> setBgmVolume(double value) async {
+    try {
+      if (preferences == null) await init();
+      await preferences?.setDouble(bgmVolumeKey, value);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static Future<double> getSfxVolume() async {
+    try {
+      if (preferences == null) await init();
+      return preferences?.getDouble(sfxVolumeKey) ?? 1.0;
+    } catch (_) {
+      return 1.0;
+    }
+  }
+
+  static Future<bool> setSfxVolume(double value) async {
+    try {
+      if (preferences == null) await init();
+      await preferences?.setDouble(sfxVolumeKey, value);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 
   /// Retrieves the top 10 high scores in descending order.
   /// If no scores exist yet, returns a list of 10 zeros.
