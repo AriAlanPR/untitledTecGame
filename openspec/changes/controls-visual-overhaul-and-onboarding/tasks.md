@@ -8,9 +8,9 @@
 
 ## 2. Parallax Starfield y Visibilidad de Proyectiles
 
-- [ ] 2.1 Implementar `StarfieldComponent` con 2 capas procedurales de estrellas a diferentes velocidades de desplazamiento vertical
-- [ ] 2.2 Integrar `StarfieldComponent` en `FirstWorld` con prioridad de fondo y reciclaje vertical de partículas
-- [ ] 2.3 Añadir efecto de resplandor / halo cian (`glow`) en `LaserComponent.render()` para contraste óptimo contra el fondo estrellado
+- [x] 2.1 Implementar `StarfieldComponent` con 2 capas procedurales de estrellas a diferentes velocidades de desplazamiento vertical
+- [x] 2.2 Integrar `StarfieldComponent` en `FirstWorld` con prioridad de fondo y reciclaje vertical de partículas
+- [x] 2.3 Añadir efecto de resplandor / halo cian (`glow`) en `LaserComponent.render()` para contraste óptimo contra el fondo estrellado
 
 ## 3. Onboarding, Start Menu Arcade y Tests de Paridad
 
