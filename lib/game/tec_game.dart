@@ -15,6 +15,7 @@ class TecGame extends FlameGame with HasCollisionDetection {
   final ShipConfig shipConfig;
   final ValueNotifier<int> scoreNotifier = ValueNotifier<int>(0);
   final ValueNotifier<int> livesNotifier = ValueNotifier<int>(3);
+  final ValueNotifier<String?> activePowerUpNotifier = ValueNotifier<String?>(null);
   bool isGameOver = false;
 
   int get score => scoreNotifier.value;
@@ -125,6 +126,7 @@ class TecGame extends FlameGame with HasCollisionDetection {
     camera.viewfinder.position = Vector2.zero();
     scoreNotifier.value = 0;
     livesNotifier.value = 3;
+    activePowerUpNotifier.value = null;
     if (world is FirstWorld) {
       (world as FirstWorld).reset();
     }

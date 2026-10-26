@@ -15,6 +15,6 @@
 
 ## 3. Feedback Audiovisual, HUD y Tests de Paridad
 
-- [ ] 3.1 Añadir indicador de power-up activo y anillo visual de escudo en `PlayerComponent` y `GameHudOverlay`
-- [ ] 3.2 Añadir SFX de recolección de power-up (`powerup.wav`) en `AudioManager` y `assets/audio/sfx/`
-- [ ] 3.3 Escribir tests unitarios y de widgets con paridad estricta para los 5 escenarios de la spec
+- [x] 3.1 Añadir indicador de power-up activo y anillo visual de escudo en `PlayerComponent` y `GameHudOverlay`
+- [x] 3.2 Añadir SFX de recolección de power-up (`powerup.wav`) en `AudioManager` y `assets/audio/sfx/`
+- [x] 3.3 Escribir tests unitarios y de widgets con paridad estricta para los 5 escenarios de la spec

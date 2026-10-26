@@ -36,7 +36,14 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   bool get hasShield => _hasShield;
   bool get hasTripleShot => _tripleShotTimer > 0;
   PlayerState get playerState => _state;
-  TecGame get effectiveGame => customGame ?? gameRef;
+  TecGame? get effectiveGame {
+    if (customGame != null) return customGame;
+    try {
+      return isMounted ? gameRef : null;
+    } catch (_) {
+      return null;
+    }
+  }
 
   set playerState(PlayerState newState) {
     _state = newState;
@@ -63,6 +70,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     } else if (type == PowerUpType.tripleShot) {
       _tripleShotTimer = 8.0;
     }
+    effectiveGame?.activePowerUpNotifier.value = type.name;
   }
 
   void takeDamage() {
@@ -70,21 +78,22 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
 
     if (_hasShield) {
       _hasShield = false;
+      effectiveGame?.activePowerUpNotifier.value = null;
       _isInvulnerable = true;
       _invulnerabilityTimer = 0.0;
       _blinkTimer = 0.0;
       AudioManager.instance.playDamage();
-      effectiveGame.shakeScreen(duration: 0.15, intensity: 8.0);
+      effectiveGame?.shakeScreen(duration: 0.15, intensity: 8.0);
       return;
     }
 
-    final damaged = effectiveGame.takeDamage();
+    final damaged = effectiveGame?.takeDamage() ?? true;
     if (damaged) {
       _isInvulnerable = true;
       _invulnerabilityTimer = 0.0;
       _blinkTimer = 0.0;
       AudioManager.instance.playDamage();
-      effectiveGame.shakeScreen();
+      effectiveGame?.shakeScreen();
     }
   }
 
@@ -164,8 +173,9 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
 
     if (_tripleShotTimer > 0) {
       _tripleShotTimer -= dt;
-      if (_tripleShotTimer < 0) {
+      if (_tripleShotTimer <= 0) {
         _tripleShotTimer = 0.0;
+        effectiveGame?.activePowerUpNotifier.value = null;
       }
     }
 
