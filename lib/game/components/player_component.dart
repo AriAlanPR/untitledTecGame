@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
+import 'package:untitled_tec_game/services/audio_manager.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
 
 enum PlayerState { idle, left, right, shot }
@@ -55,6 +56,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
       _isInvulnerable = true;
       _invulnerabilityTimer = 0.0;
       _blinkTimer = 0.0;
+      AudioManager.instance.playDamage();
     }
   }
 
@@ -182,6 +184,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   void fireLaser() {
     playerState = PlayerState.shot;
     _shotTimer = 0.0;
+    AudioManager.instance.playLaser();
 
     final laser = LaserComponent(
       position: Vector2(position.x, position.y - (size.y / 2)),

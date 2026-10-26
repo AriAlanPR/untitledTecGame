@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:untitled_tec_game/game/components/player_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
+import 'package:untitled_tec_game/services/audio_manager.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
 
 class AsteroidComponent extends SpriteAnimationComponent
@@ -37,6 +38,7 @@ class AsteroidComponent extends SpriteAnimationComponent
   void hitByLaser() {
     if (_isDestroyed) return;
     _isDestroyed = true;
+    AudioManager.instance.playExplosion();
     removeFromParent();
   }
 

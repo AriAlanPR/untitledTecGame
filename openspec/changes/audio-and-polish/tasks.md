@@ -8,10 +8,10 @@
 
 ## 2. Integración de Audio en Gameplay y Ciclo de Vida
 
-- [ ] 2.1 Conectar disparo de láser con SFX de láser en `PlayerComponent`
-- [ ] 2.2 Conectar destrucción de asteroide con SFX de explosión en `AsteroidComponent`
-- [ ] 2.3 Conectar daño al jugador y Game Over con sus respectivos SFX en `PlayerComponent` y `TecGame`
-- [ ] 2.4 Controlar inicio, pausa y reanudación de música de fondo (BGM) en el ciclo de vida del juego
+- [x] 2.1 Conectar disparo de láser con SFX de láser en `PlayerComponent`
+- [x] 2.2 Conectar destrucción de asteroide con SFX de explosión en `AsteroidComponent`
+- [x] 2.3 Conectar daño al jugador y Game Over con sus respectivos SFX en `PlayerComponent` y `TecGame`
+- [x] 2.4 Controlar inicio, pausa y reanudación de música de fondo (BGM) en el ciclo de vida del juego
 
 ## 3. Controles de Configuración de Audio y Tests de Paridad
 

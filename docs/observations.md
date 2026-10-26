@@ -36,3 +36,21 @@ Bitácora de observaciones técnicas, lecciones aprendidas, hallazgos de compati
 ### Persistencia del Ranking Top 10
 - **Observación**: En Corona SDK, los récords se almacenaban en un archivo JSON plano `scores.json` dentro de `system.DocumentsDirectory`.
 - **Implementación**: En Flutter, la clase `PersistentData` (`lib/utils/persistent_data.dart`) maneja `SharedPreferences`. Se serializará el top 10 bajo la clave `'high_scores'` como JSON string o lista de enteros, alimentando directamente a `ScoreMenuPage`.
+
+---
+
+## 4. Filosofía de Movimiento y Animación: UI vs Game Loop
+
+### Separación de Enfoques de Animación
+- **Observación**: Los videojuegos arcade requieren un nivel de reactividad visual muy alto ("jugosidad" o *juice*), pero mezclar técnicas de animación de aplicaciones convencionales en el bucle de renderizado de Flame degrada el rendimiento y rompe la consistencia.
+- **Decisión Arquitectónica**:
+  1. **Capa Flutter UI & Overlays (Vocabulario de Emil Kowalski / `flutter-movimiento`)**:
+     - Aplica a: `StartMenu`, `ConfigurationPage`, `ScoreMenuPage`, `GameHudOverlay`, `GameOverOverlay` y diálogos.
+     - Principios: Microinteracciones táctiles (escalado a 0.95 al presionar botones), curvas spring amortiguadas, duraciones rápidas (150–250ms), transiciones de salida sin retrasos innecesarios para mantener al jugador en acción.
+  2. **Capa Canvas & Componentes (Flame Game Loop / "Game Feel" & "Juice")**:
+     - Aplica a: `PlayerComponent`, `AsteroidComponent`, `LaserComponent`, `FirstWorld`.
+     - Principios: Basados en técnicas de *Game Feel* (Jan Willem Nijman / Vlambeer):
+       - *Screen Shake*: Sacudida de cámara con atenuación exponencial ante impactos críticos.
+       - *Hit Stop / Freeze Frames*: Micro-pausas deliberadas (2 a 4 frames) al colisionar para transmitir contundencia física.
+       - *Partículas y Flash*: Destellos de impacto y sistemas de partículas acelerados por hardware.
+
