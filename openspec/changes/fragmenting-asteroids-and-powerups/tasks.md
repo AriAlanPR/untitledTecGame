@@ -8,10 +8,10 @@
 
 ## 2. Componentes de Power-Up y Efectos en el Jugador
 
-- [ ] 2.1 Crear componente `PowerUpComponent` (tipos: shield, tripleShot) con desplazamiento descendente y hitbox de recolección
-- [ ] 2.2 Integrar estado de escudo (`hasShield`) en `PlayerComponent` que absorba 1 golpe directo sin restar vidas
-- [ ] 2.3 Integrar modo de disparo triple (`hasTripleShot`, temporizador 8s) con 3 láseres en abanico en `PlayerComponent`
-- [ ] 2.4 Generación aleatoria de power-up en `AsteroidComponent` al destruirse
+- [x] 2.1 Crear componente `PowerUpComponent` (tipos: shield, tripleShot) con desplazamiento descendente y hitbox de recolección
+- [x] 2.2 Integrar estado de escudo (`hasShield`) en `PlayerComponent` que absorba 1 golpe directo sin restar vidas
+- [x] 2.3 Integrar modo de disparo triple (`hasTripleShot`, temporizador 8s) con 3 láseres en abanico en `PlayerComponent`
+- [x] 2.4 Generación aleatoria de power-up en `AsteroidComponent` al destruirse
 
 ## 3. Feedback Audiovisual, HUD y Tests de Paridad
 

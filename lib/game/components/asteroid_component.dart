@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:untitled_tec_game/game/components/player_component.dart';
+import 'package:untitled_tec_game/game/components/power_up_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/services/audio_manager.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
@@ -82,6 +83,12 @@ class AsteroidComponent extends SpriteAnimationComponent
       _spawnFragments(AsteroidSize.medium, 35 * pi / 180);
     } else if (asteroidSize == AsteroidSize.medium) {
       _spawnFragments(AsteroidSize.small, 45 * pi / 180);
+    }
+
+    // 20% drop chance for power-up
+    if (Random().nextDouble() < 0.20) {
+      final pType = Random().nextBool() ? PowerUpType.shield : PowerUpType.tripleShot;
+      parent?.add(PowerUpComponent(position: position.clone(), type: pType));
     }
 
     removeFromParent();

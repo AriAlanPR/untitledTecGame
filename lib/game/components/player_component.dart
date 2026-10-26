@@ -3,7 +3,9 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
+import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';
+import 'package:untitled_tec_game/game/components/power_up_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/services/audio_manager.dart';
@@ -27,8 +29,12 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   static const double blinkInterval = 0.15;
   final TecGame? customGame;
   final ShipConfig config;
+  bool _hasShield = false;
+  double _tripleShotTimer = 0.0;
 
   bool get isInvulnerable => _isInvulnerable;
+  bool get hasShield => _hasShield;
+  bool get hasTripleShot => _tripleShotTimer > 0;
   PlayerState get playerState => _state;
   TecGame get effectiveGame => customGame ?? gameRef;
 
@@ -51,8 +57,26 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
           anchor: Anchor.center,
         );
 
+  void applyPowerUp(PowerUpType type) {
+    if (type == PowerUpType.shield) {
+      _hasShield = true;
+    } else if (type == PowerUpType.tripleShot) {
+      _tripleShotTimer = 8.0;
+    }
+  }
+
   void takeDamage() {
     if (_isInvulnerable) return;
+
+    if (_hasShield) {
+      _hasShield = false;
+      _isInvulnerable = true;
+      _invulnerabilityTimer = 0.0;
+      _blinkTimer = 0.0;
+      AudioManager.instance.playDamage();
+      effectiveGame.shakeScreen(duration: 0.15, intensity: 8.0);
+      return;
+    }
 
     final damaged = effectiveGame.takeDamage();
     if (damaged) {
@@ -118,8 +142,32 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+
+    if (_hasShield) {
+      final shieldPaint = Paint()
+        ..color = const Color(0x9900E5FF)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 4.0;
+      canvas.drawCircle(
+        Offset(size.x / 2, size.y / 2),
+        size.x / 2 + 6,
+        shieldPaint,
+      );
+    }
+  }
+
+  @override
   void update(double dt) {
     super.update(dt);
+
+    if (_tripleShotTimer > 0) {
+      _tripleShotTimer -= dt;
+      if (_tripleShotTimer < 0) {
+        _tripleShotTimer = 0.0;
+      }
+    }
 
     if (_state == PlayerState.shot) {
       _shotTimer += dt;
@@ -194,5 +242,16 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
       position: Vector2(position.x, position.y - (size.y / 2)),
     );
     parent?.add(laser);
+
+    if (hasTripleShot) {
+      final leftLaser = LaserComponent(
+        position: Vector2(position.x - 28, position.y - (size.y / 2) + 12),
+      );
+      final rightLaser = LaserComponent(
+        position: Vector2(position.x + 28, position.y - (size.y / 2) + 12),
+      );
+      parent?.add(leftLaser);
+      parent?.add(rightLaser);
+    }
   }
 }

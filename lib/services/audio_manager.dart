@@ -131,6 +131,11 @@ class AudioManager {
     delegate.playSfx('sfx/game_over.wav', volume: _sfxVolume);
   }
 
+  void playPowerUp() {
+    if (!_sfxEnabled) return;
+    delegate.playSfx('sfx/powerup.wav', volume: _sfxVolume);
+  }
+
   Future<void> startBgm() async {
     if (!_bgmEnabled) return;
     await delegate.playBgm('music/space_theme.wav', volume: _bgmVolume);
