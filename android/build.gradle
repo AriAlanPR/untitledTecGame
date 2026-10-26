@@ -9,6 +9,14 @@ rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+// Plugins antiguos (p. ej. flutter_native_splash) compilan contra SDK < 34 y fallan el AAR check.
+subprojects {
+    afterEvaluate { p ->
+        if (p.hasProperty("android") && p.android.hasProperty("compileSdkVersion")) {
+            p.android.compileSdkVersion 36
+        }
+    }
+}
 subprojects {
     project.evaluationDependsOn(":app")
 }
