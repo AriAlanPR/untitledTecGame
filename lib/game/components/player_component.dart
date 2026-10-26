@@ -14,7 +14,7 @@ import 'package:untitled_tec_game/utils/constants.dart';
 enum PlayerState { idle, left, right, shot }
 
 class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
-    with HasGameRef<TecGame>, DragCallbacks, TapCallbacks, CollisionCallbacks {
+    with HasGameRef<TecGame>, CollisionCallbacks {
   static const double playerWidth = 128.0;
   static const double playerHeight = 128.0;
   static const double minX = playerWidth / 2;
@@ -217,11 +217,6 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     }
   }
 
-  @override
-  void onDragUpdate(DragUpdateEvent event) {
-    dragBy(event.localDelta.x);
-  }
-
   void dragBy(double deltaX) {
     position.x += deltaX * config.speedMultiplier;
     position.x = position.x.clamp(minX, maxX);
@@ -233,27 +228,6 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
         playerState = PlayerState.right;
       }
     }
-  }
-
-  @override
-  void onDragEnd(DragEndEvent event) {
-    super.onDragEnd(event);
-    if (_state != PlayerState.shot) {
-      playerState = PlayerState.idle;
-    }
-  }
-
-  @override
-  void onDragCancel(DragCancelEvent event) {
-    super.onDragCancel(event);
-    if (_state != PlayerState.shot) {
-      playerState = PlayerState.idle;
-    }
-  }
-
-  @override
-  void onTapDown(TapDownEvent event) {
-    fireLaser();
   }
 
   void fireLaser() {

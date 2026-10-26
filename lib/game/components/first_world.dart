@@ -5,6 +5,7 @@ import 'package:untitled_tec_game/game/components/asteroid_spawner.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';
 import 'package:untitled_tec_game/game/components/player_component.dart';
 import 'package:untitled_tec_game/game/components/power_up_component.dart';
+import 'package:untitled_tec_game/game/components/touch_control_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
@@ -13,6 +14,7 @@ class FirstWorld extends World with HasGameRef<TecGame> {
   final ShipConfig shipConfig;
   late final PlayerComponent player;
   late final AsteroidSpawner spawner;
+  late final TouchControlComponent touchControl;
 
   FirstWorld({this.shipConfig = ShipConfig.alphaScout});
 
@@ -33,5 +35,8 @@ class FirstWorld extends World with HasGameRef<TecGame> {
 
     spawner = AsteroidSpawner();
     add(spawner);
+
+    touchControl = TouchControlComponent(player: player);
+    add(touchControl);
   }
 }
