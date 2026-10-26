@@ -7,24 +7,38 @@ import 'package:untitled_tec_game/game/components/boss_component.dart';
 import 'package:untitled_tec_game/game/components/boss_plasma_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 
-class LaserComponent extends SpriteComponent with HasGameRef<TecGame>, CollisionCallbacks {
+class LaserComponent extends PositionComponent with HasGameRef<TecGame>, CollisionCallbacks {
   static const double speed = 900.0;
   bool _hasCollided = false;
   final TecGame? customGame;
 
-  static final Paint _glowPaint = Paint()
-    ..color = const Color(0x9900E5FF)
-    ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4.0);
+  static final Paint _arrowHeadPaint = Paint()
+    ..color = const Color(0xFF00E5FF)
+    ..style = PaintingStyle.fill;
+
+  static final Paint _shaftPaint = Paint()
+    ..color = const Color(0xFFD7CCC8)
+    ..strokeWidth = 3.5
+    ..style = PaintingStyle.stroke;
+
+  static final Paint _fletchingPaint = Paint()
+    ..color = const Color(0xFF80D8FF)
+    ..style = PaintingStyle.fill;
+
+  static final Paint _arrowGlowPaint = Paint()
+    ..color = const Color(0x6600E5FF)
+    ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5.0);
 
   bool get hasCollided => _hasCollided;
   bool get isOutOfBounds => position.y < -50;
+  bool get isArrow => true;
 
   LaserComponent({
     required Vector2 position,
     this.customGame,
   }) : super(
           position: position,
-          size: Vector2(34, 40),
+          size: Vector2(20, 48),
           anchor: Anchor.center,
         );
 
@@ -32,28 +46,51 @@ class LaserComponent extends SpriteComponent with HasGameRef<TecGame>, Collision
 
   @override
   void render(Canvas canvas) {
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(-2, -2, size.x + 4, size.y + 4),
-        const Radius.circular(6),
-      ),
-      _glowPaint,
-    );
     super.render(canvas);
+
+    final cx = size.x / 2;
+
+    // Glowing aura
+    final glowPath = Path()
+      ..moveTo(cx, -2)
+      ..lineTo(cx + 10, 16)
+      ..lineTo(cx + 3, size.y)
+      ..lineTo(cx - 3, size.y)
+      ..lineTo(cx - 10, 16)
+      ..close();
+    canvas.drawPath(glowPath, _arrowGlowPaint);
+
+    // Arrow Shaft
+    canvas.drawLine(Offset(cx, 12), Offset(cx, size.y - 2), _shaftPaint);
+
+    // Arrowhead (Tip)
+    final headPath = Path()
+      ..moveTo(cx, 0)
+      ..lineTo(cx + 8, 14)
+      ..lineTo(cx, 11)
+      ..lineTo(cx - 8, 14)
+      ..close();
+    canvas.drawPath(headPath, _arrowHeadPaint);
+
+    // Fletching (Left & Right Feathers)
+    final fletchLeft = Path()
+      ..moveTo(cx - 1, size.y - 14)
+      ..lineTo(cx - 7, size.y - 2)
+      ..lineTo(cx - 2, size.y - 6)
+      ..close();
+    canvas.drawPath(fletchLeft, _fletchingPaint);
+
+    final fletchRight = Path()
+      ..moveTo(cx + 1, size.y - 14)
+      ..lineTo(cx + 7, size.y - 2)
+      ..lineTo(cx + 2, size.y - 6)
+      ..close();
+    canvas.drawPath(fletchRight, _fletchingPaint);
   }
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
-    // Laser frame is index 117 (0-based) from effects_skills.png (34x34)
-    final image = await gameRef.images.load('effects_skills.png');
-    final spriteSheet = SpriteSheet(
-      image: image,
-      srcSize: Vector2(34, 34),
-    );
-    sprite = spriteSheet.getSpriteById(117);
-
     add(RectangleHitbox());
   }
 
