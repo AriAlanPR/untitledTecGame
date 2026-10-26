@@ -14,6 +14,6 @@
 
 ## 3. UI del Selector de Naves y Tests de Paridad
 
-- [ ] 3.1 Crear widget selector de nave en `StartMenu` con micro-escalado táctil (criterio `flutter-movimiento`)
-- [ ] 3.2 Añadir cadenas de localización para nombres y atributos de naves en `en_US.json` y `es_MX.json`
-- [ ] 3.3 Escribir tests unitarios y de widgets con paridad estricta para los 4 escenarios de la spec
+- [x] 3.1 Crear widget selector de nave en `StartMenu` con micro-escalado táctil (criterio `flutter-movimiento`)
+- [x] 3.2 Añadir cadenas de localización para nombres y atributos de naves en `en_US.json` y `es_MX.json`
+- [x] 3.3 Escribir tests unitarios y de widgets con paridad estricta para los 4 escenarios de la spec

@@ -23,5 +23,12 @@
     "musica": "Música",
     "efectos_sonido": "Efectos de Sonido",
     "volumen_musica": "Volumen de Música",
-    "volumen_efectos": "Volumen de Efectos"
+    "volumen_efectos": "Volumen de Efectos",
+    "seleccionar_nave": "Seleccionar Nave",
+    "nave_alpha_scout": "Alpha Scout",
+    "nave_beta_interceptor": "Beta Interceptor",
+    "cadencia": "Cadencia",
+    "velocidad": "Velocidad",
+    "equilibrada": "Equilibrada",
+    "alta_velocidad": "Alta Velocidad"
 }

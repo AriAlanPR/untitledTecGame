@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
+import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
 import 'package:untitled_tec_game/widgets/particles.dart';
+import 'package:untitled_tec_game/widgets/ship_selector_widget.dart';
 
 //TODO - consider a welcome back from saved settings
 class StartMenu extends StatefulWidget {
@@ -17,13 +19,12 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
   late double width;
   late double height;
   final double defaultButtonOpacity = 0.9;
+  ShipConfig _selectedShip = ShipConfig.alphaScout;
 
   @override
-
   void initState() {
     super.initState();
   }
-
 
   void onStart() {
     println("starting game...");
@@ -35,6 +36,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
     Navigator.pushNamed(
       context,
       '/game',
+      arguments: {'ship': _selectedShip},
     );
   }
 
@@ -56,19 +58,28 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(),
-          Row( //NOTE - banner de titulo
+          const SizedBox(),
+          Row(
+            //NOTE - banner de titulo
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                image: AssetImage('assets/images/banner.png'),
+                image: const AssetImage('assets/images/banner.png'),
                 width: width * 0.67,
                 height: height * 0.1,
                 fit: BoxFit.fill,
               ),
             ],
           ),
-          ElevatedButton( //NOTE - jugar
+          ShipSelectorWidget(
+            onShipChanged: (ship) {
+              setState(() {
+                _selectedShip = ship;
+              });
+            },
+          ),
+          ElevatedButton(
+            //NOTE - jugar
             onPressed: onStart,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
@@ -82,16 +93,17 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                 ).getRadius,
                 gradient: LinearGradient(
                   colors: [
-                    Colors.green.shade300.withOpacity(defaultButtonOpacity),
+                    Colors.green.shade300.withValues(alpha: defaultButtonOpacity),
                     Colors.green.shade200,
                     Colors.green.shade100,
-                    Colors.white.withOpacity(defaultButtonOpacity)
+                    Colors.white.withValues(alpha: defaultButtonOpacity)
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
               ),
-              child: Padding( //icono de jugar
+              child: Padding(
+                //icono de jugar
                 padding: const EdgeInsets.symmetric(
                   vertical: 4.0,
                   horizontal: 48.0,

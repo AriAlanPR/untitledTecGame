@@ -23,5 +23,12 @@
     "musica": "Music",
     "efectos_sonido": "Sound Effects",
     "volumen_musica": "Music Volume",
-    "volumen_efectos": "Sound Effects Volume"
+    "volumen_efectos": "Sound Effects Volume",
+    "seleccionar_nave": "Select Ship",
+    "nave_alpha_scout": "Alpha Scout",
+    "nave_beta_interceptor": "Beta Interceptor",
+    "cadencia": "Cadence",
+    "velocidad": "Speed",
+    "equilibrada": "Balanced",
+    "alta_velocidad": "High Speed"
 }
