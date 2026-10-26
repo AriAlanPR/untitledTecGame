@@ -3,6 +3,8 @@ import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game/components/asteroid_component.dart';
+import 'package:untitled_tec_game/game/components/boss_component.dart';
+import 'package:untitled_tec_game/game/components/boss_plasma_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 
 class LaserComponent extends SpriteComponent with HasGameRef<TecGame>, CollisionCallbacks {
@@ -80,6 +82,14 @@ class LaserComponent extends SpriteComponent with HasGameRef<TecGame>, Collision
       effectiveGame.addScore(other.scorePoints);
       other.hitByLaser();
       effectiveGame.hitStop();
+    } else if (other is BossPlasmaComponent) {
+      _hasCollided = true;
+      removeFromParent();
+      other.destroyByLaser();
+    } else if (other is BossComponent) {
+      _hasCollided = true;
+      removeFromParent();
+      other.takeDamage(1);
     }
   }
 }

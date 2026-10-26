@@ -49,5 +49,78 @@ void main() {
       final boss = bosses.first;
       expect(boss.currentHp, BossComponent.maxHp);
     });
+
+    test('Boss fires destructible plasma projectiles at player', () async {
+      final game = TecGame();
+      final world = game.world as FirstWorld;
+      await world.onLoad();
+
+      final boss = BossComponent(customGame: game);
+      world.add(boss);
+
+      expect(world.children.whereType<BossPlasmaComponent>(), isEmpty);
+
+      // Trigger plasma shot
+      boss.firePlasma();
+      final plasmas = world.children.whereType<BossPlasmaComponent>();
+      expect(plasmas.length, 1);
+      final plasma = plasmas.first;
+      expect(plasma.isDestroyed, isFalse);
+
+      // Laser collides with plasma
+      final laser = LaserComponent(position: plasma.position.clone(), customGame: game);
+      world.add(laser);
+
+      laser.onCollisionStart({plasma.position}, plasma);
+      expect(plasma.isDestroyed, isTrue);
+    });
+
+    test('Laser impacts damage boss and update boss health bar', () async {
+      final game = TecGame();
+      final world = game.world as FirstWorld;
+      await world.onLoad();
+
+      final boss = BossComponent(customGame: game);
+      world.add(boss);
+      await boss.onLoad();
+
+      expect(boss.currentHp, 40);
+      expect(game.bossHpNotifier.value, 1.0);
+
+      // Simulate laser hitting the boss
+      final laser = LaserComponent(position: boss.position.clone(), customGame: game);
+      world.add(laser);
+
+      laser.onCollisionStart({boss.position}, boss);
+      expect(boss.currentHp, 39);
+      expect(game.bossHpNotifier.value, 39 / 40);
+    });
+
+    test('Boss below half health triggers dive bomb attack pattern', () async {
+      final game = TecGame();
+      final world = game.world as FirstWorld;
+      await world.onLoad();
+
+      final boss = BossComponent(customGame: game);
+      world.add(boss);
+      boss.state = BossState.strafe;
+
+      // Boss with full health does not dive
+      expect(boss.isEnraged, isFalse);
+
+      // Reduce health below 50% (less than 20 HP)
+      boss.takeDamage(22);
+      expect(boss.currentHp, 18);
+      expect(boss.isEnraged, isTrue);
+
+      // Advance time to trigger dive bomb pattern
+      boss.update(6.1);
+      expect(boss.state, BossState.diveBomb);
+
+      // In dive bomb state, boss descends rapidly
+      final initialY = boss.position.y;
+      boss.update(0.1);
+      expect(boss.position.y, greaterThan(initialY));
+    });
   });
 }
