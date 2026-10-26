@@ -8,6 +8,8 @@ class AsteroidSpawner extends Component with HasGameRef<TecGame> {
   final Random _random = Random();
   final double spawnInterval;
   late final Timer _timer;
+  bool isPaused = false;
+  double speedMultiplier = 1.0;
 
   AsteroidSpawner({this.spawnInterval = 0.7}) {
     _timer = Timer(
@@ -20,10 +22,14 @@ class AsteroidSpawner extends Component with HasGameRef<TecGame> {
   @override
   void update(double dt) {
     super.update(dt);
-    _timer.update(dt);
+    if (!isPaused) {
+      _timer.update(dt);
+    }
   }
 
   void _spawnAsteroid() {
+    if (isPaused) return;
+
     final whereFrom = _random.nextInt(3); // 0: left, 1: top, 2: right
     late final Vector2 spawnPosition;
     late final Vector2 velocity;
@@ -59,7 +65,7 @@ class AsteroidSpawner extends Component with HasGameRef<TecGame> {
 
     final asteroid = AsteroidComponent(
       position: spawnPosition,
-      velocity: velocity,
+      velocity: velocity * speedMultiplier,
       torque: torque,
       asteroidSize: size,
     );

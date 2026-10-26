@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled_tec_game/game/components/boss_component.dart';
 import 'package:untitled_tec_game/game/components/first_world.dart';
 import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/services/audio_manager.dart';
@@ -16,10 +17,19 @@ class TecGame extends FlameGame with HasCollisionDetection {
   final ValueNotifier<int> scoreNotifier = ValueNotifier<int>(0);
   final ValueNotifier<int> livesNotifier = ValueNotifier<int>(3);
   final ValueNotifier<String?> activePowerUpNotifier = ValueNotifier<String?>(null);
+  final ValueNotifier<double?> bossHpNotifier = ValueNotifier<double?>(null);
+  final ValueNotifier<bool> bossWarningNotifier = ValueNotifier<bool>(false);
+
   bool isGameOver = false;
+  double _sessionTime = 0.0;
+  bool _bossSpawned = false;
 
   int get score => scoreNotifier.value;
   int get lives => livesNotifier.value;
+  double get sessionTime => _sessionTime;
+  set sessionTime(double val) => _sessionTime = val;
+  bool get bossSpawned => _bossSpawned;
+  bool get isBossActive => bossHpNotifier.value != null;
 
   double _shakeTimer = 0.0;
   double _shakeDuration = 0.0;
@@ -64,6 +74,39 @@ class TecGame extends FlameGame with HasCollisionDetection {
         final offsetY = (_random.nextDouble() * 2 - 1) * currentIntensity;
         camera.viewfinder.position = Vector2(offsetX, offsetY);
       }
+    }
+
+    if (!isGameOver) {
+      _sessionTime += dt;
+      if (!_bossSpawned && _sessionTime >= 45.0 && score >= 1500) {
+        triggerBossEncounter();
+      }
+    }
+  }
+
+  void triggerBossEncounter({bool immediate = false}) {
+    if (_bossSpawned && !immediate) return;
+    _bossSpawned = true;
+    bossWarningNotifier.value = true;
+
+    if (world is FirstWorld) {
+      (world as FirstWorld).spawner.isPaused = true;
+    }
+
+    if (immediate) {
+      bossWarningNotifier.value = false;
+      if (world is FirstWorld) {
+        final boss = BossComponent();
+        (world as FirstWorld).add(boss);
+      }
+    } else {
+      Future.delayed(const Duration(seconds: 3), () {
+        bossWarningNotifier.value = false;
+        if (!isGameOver && world is FirstWorld) {
+          final boss = BossComponent();
+          (world as FirstWorld).add(boss);
+        }
+      });
     }
   }
 
@@ -124,6 +167,10 @@ class TecGame extends FlameGame with HasCollisionDetection {
     isGameOver = false;
     _isHitStopping = false;
     _shakeTimer = 0.0;
+    _sessionTime = 0.0;
+    _bossSpawned = false;
+    bossHpNotifier.value = null;
+    bossWarningNotifier.value = false;
     camera.viewfinder.position = Vector2.zero();
     scoreNotifier.value = 0;
     livesNotifier.value = 3;

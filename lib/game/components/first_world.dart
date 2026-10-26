@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:untitled_tec_game/game/components/asteroid_component.dart';
 import 'package:untitled_tec_game/game/components/asteroid_spawner.dart';
+import 'package:untitled_tec_game/game/components/boss_component.dart';
+import 'package:untitled_tec_game/game/components/boss_plasma_component.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';
 import 'package:untitled_tec_game/game/components/player_component.dart';
 import 'package:untitled_tec_game/game/components/power_up_component.dart';
@@ -24,6 +26,10 @@ class FirstWorld extends World with HasGameRef<TecGame> {
     children.whereType<AsteroidComponent>().toList().forEach((a) => a.removeFromParent());
     children.whereType<LaserComponent>().toList().forEach((l) => l.removeFromParent());
     children.whereType<PowerUpComponent>().toList().forEach((p) => p.removeFromParent());
+    children.whereType<BossComponent>().toList().forEach((b) => b.removeFromParent());
+    children.whereType<BossPlasmaComponent>().toList().forEach((bp) => bp.removeFromParent());
+    spawner.isPaused = false;
+    spawner.speedMultiplier = 1.0;
     player.position = Vector2(gameWidth / 2, gameHeight - 250);
     player.resetState();
   }
