@@ -54,11 +54,14 @@ class AsteroidSpawner extends Component with HasGameRef<TecGame> {
     }
 
     final torque = -3.0 + _random.nextDouble() * 6.0;
+    final sizeRoll = _random.nextDouble();
+    final size = sizeRoll < 0.6 ? AsteroidSize.large : AsteroidSize.medium;
 
     final asteroid = AsteroidComponent(
       position: spawnPosition,
       velocity: velocity,
       torque: torque,
+      asteroidSize: size,
     );
 
     parent?.add(asteroid);

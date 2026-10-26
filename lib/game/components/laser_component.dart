@@ -60,8 +60,8 @@ class LaserComponent extends SpriteComponent with HasGameRef<TecGame>, Collision
     if (other is AsteroidComponent) {
       _hasCollided = true;
       removeFromParent();
+      effectiveGame.addScore(other.scorePoints);
       other.hitByLaser();
-      effectiveGame.addScore(100);
       effectiveGame.hitStop();
     }
   }

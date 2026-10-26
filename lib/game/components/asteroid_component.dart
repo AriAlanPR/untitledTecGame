@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
@@ -7,10 +8,11 @@ import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/services/audio_manager.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
 
+enum AsteroidSize { large, medium, small }
+
 class AsteroidComponent extends SpriteAnimationComponent
     with HasGameRef<TecGame>, CollisionCallbacks {
-  static const double baseSize = 85.0;
-
+  final AsteroidSize asteroidSize;
   final Vector2 velocity;
   final double torque;
   bool _isDestroyed = false;
@@ -18,6 +20,40 @@ class AsteroidComponent extends SpriteAnimationComponent
 
   bool get isDestroyed => _isDestroyed;
   TecGame get effectiveGame => customGame ?? gameRef;
+
+  static double sizeFor(AsteroidSize size) {
+    switch (size) {
+      case AsteroidSize.large:
+        return 120.0;
+      case AsteroidSize.medium:
+        return 85.0;
+      case AsteroidSize.small:
+        return 50.0;
+    }
+  }
+
+  static double radiusFor(AsteroidSize size) {
+    switch (size) {
+      case AsteroidSize.large:
+        return 45.0;
+      case AsteroidSize.medium:
+        return 32.0;
+      case AsteroidSize.small:
+        return 18.0;
+    }
+  }
+
+  int get scorePoints {
+    switch (asteroidSize) {
+      case AsteroidSize.large:
+        return 150;
+      case AsteroidSize.medium:
+        return 100;
+      case AsteroidSize.small:
+        return 50;
+    }
+  }
+
   bool get isOutOfBounds =>
       position.x < -150 ||
       position.x > gameWidth + 150 ||
@@ -28,10 +64,11 @@ class AsteroidComponent extends SpriteAnimationComponent
     required Vector2 position,
     required this.velocity,
     this.torque = 0.0,
+    this.asteroidSize = AsteroidSize.medium,
     this.customGame,
   }) : super(
           position: position,
-          size: Vector2.all(baseSize),
+          size: Vector2.all(sizeFor(asteroidSize)),
           anchor: Anchor.center,
         );
 
@@ -39,7 +76,44 @@ class AsteroidComponent extends SpriteAnimationComponent
     if (_isDestroyed) return;
     _isDestroyed = true;
     AudioManager.instance.playExplosion();
+
+    // Spawn fragments
+    if (asteroidSize == AsteroidSize.large) {
+      _spawnFragments(AsteroidSize.medium, 35 * pi / 180);
+    } else if (asteroidSize == AsteroidSize.medium) {
+      _spawnFragments(AsteroidSize.small, 45 * pi / 180);
+    }
+
     removeFromParent();
+  }
+
+  void _spawnFragments(AsteroidSize childSize, double angleRad) {
+    final v1 = _rotateVector(velocity, angleRad) * 1.15;
+    final v2 = _rotateVector(velocity, -angleRad) * 1.15;
+
+    final child1 = AsteroidComponent(
+      position: position.clone(),
+      velocity: v1,
+      torque: torque * 1.2,
+      asteroidSize: childSize,
+      customGame: customGame,
+    );
+    final child2 = AsteroidComponent(
+      position: position.clone(),
+      velocity: v2,
+      torque: -torque * 1.2,
+      asteroidSize: childSize,
+      customGame: customGame,
+    );
+
+    parent?.add(child1);
+    parent?.add(child2);
+  }
+
+  Vector2 _rotateVector(Vector2 v, double rad) {
+    final c = cos(rad);
+    final s = sin(rad);
+    return Vector2(v.x * c - v.y * s, v.x * s + v.y * c);
   }
 
   @override
@@ -76,7 +150,11 @@ class AsteroidComponent extends SpriteAnimationComponent
       loop: true,
     );
 
-    add(CircleHitbox(radius: 35, anchor: Anchor.center, position: size / 2));
+    add(CircleHitbox(
+      radius: radiusFor(asteroidSize),
+      anchor: Anchor.center,
+      position: size / 2,
+    ));
   }
 
   @override
