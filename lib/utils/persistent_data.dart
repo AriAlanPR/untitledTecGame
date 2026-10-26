@@ -189,7 +189,8 @@ class PersistentData {
   /// @return {Future<bool>} - A Future that completes with a boolean value indicating whether the data was successfully saved.
   static Future<bool> save(String key, String value) async {
     try {
-      await preferences!.setString(key, value);
+      if (preferences == null) await init();
+      await preferences?.setString(key, value);
       
       return true; 
     } catch (e) {

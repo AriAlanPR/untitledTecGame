@@ -39,17 +39,17 @@ class TecGame extends FlameGame with HasCollisionDetection {
   void hitStop([int milliseconds = 45]) {
     if (_isHitStopping || isGameOver) return;
     _isHitStopping = true;
-    pauseEngine();
     Future.delayed(Duration(milliseconds: milliseconds), () {
       _isHitStopping = false;
-      if (!isGameOver) {
-        resumeEngine();
-      }
     });
   }
 
   @override
   void update(double dt) {
+    if (_isHitStopping) {
+      return;
+    }
+
     super.update(dt);
 
     if (_shakeTimer > 0) {
@@ -122,6 +122,7 @@ class TecGame extends FlameGame with HasCollisionDetection {
 
   void resetGame() {
     isGameOver = false;
+    _isHitStopping = false;
     _shakeTimer = 0.0;
     camera.viewfinder.position = Vector2.zero();
     scoreNotifier.value = 0;

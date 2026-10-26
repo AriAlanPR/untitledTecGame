@@ -73,6 +73,19 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     effectiveGame?.activePowerUpNotifier.value = type.name;
   }
 
+  void resetState() {
+    _hasShield = false;
+    _tripleShotTimer = 0.0;
+    _isInvulnerable = false;
+    _invulnerabilityTimer = 0.0;
+    _blinkTimer = 0.0;
+    _shotTimer = 0.0;
+    opacity = 1.0;
+    if (animations != null && animations!.containsKey(PlayerState.idle)) {
+      playerState = PlayerState.idle;
+    }
+  }
+
   void takeDamage() {
     if (_isInvulnerable) return;
 

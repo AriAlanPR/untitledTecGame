@@ -4,7 +4,6 @@ import 'package:untitled_tec_game/mixins/validate_mixin.dart';
 import 'package:untitled_tec_game/services/audio_manager.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/persistent_data.dart';
-import 'package:untitled_tec_game/widgets/dialog.dart';
 import 'package:untitled_tec_game/widgets/easytext.dart';
 import 'package:untitled_tec_game/widgets/particles.dart';
 
@@ -104,11 +103,17 @@ class _ConfigurationPageState extends State<ConfigurationPage> with ValidateMixi
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () async {
-                      Dialogo.showLoadingDialog(context, message: "guardando".i18n());
+                      FocusScope.of(context).unfocus();
                       await PersistentData.save("name", _nombreController.text);
                       if (context.mounted) {
                         Particles(context: context).showCircle();
-                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("exito".i18n()),
+                            duration: const Duration(seconds: 2),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
