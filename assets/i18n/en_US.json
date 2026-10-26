@@ -30,5 +30,16 @@
     "cadencia": "Cadence",
     "velocidad": "Speed",
     "equilibrada": "Balanced",
-    "alta_velocidad": "High Speed"
+    "alta_velocidad": "High Speed",
+    "como_jugar": "How to Play",
+    "como_jugar_movimiento_titulo": "Relative Steering",
+    "como_jugar_movimiento_desc": "Drag your finger along the lower screen to steer without blocking your ship.",
+    "como_jugar_disparo_titulo": "Touch Firing",
+    "como_jugar_disparo_desc": "Tap anywhere on screen to fire lasers with precision cadence.",
+    "como_jugar_asteroides_titulo": "Fragmentation",
+    "como_jugar_asteroides_desc": "Large asteroids split into two medium ones, and medium ones into two small ones.",
+    "como_jugar_powerups_titulo": "Power-Ups",
+    "como_jugar_powerups_desc": "Blue shield absorbs 1 collision without life loss. Green triple laser lasts 8 seconds.",
+    "instrucciones_prompt": "Drag to move · Tap to fire",
+    "entendido": "Got it!"
 }

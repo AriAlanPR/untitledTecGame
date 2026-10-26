@@ -30,5 +30,16 @@
     "cadencia": "Cadencia",
     "velocidad": "Velocidad",
     "equilibrada": "Equilibrada",
-    "alta_velocidad": "Alta Velocidad"
+    "alta_velocidad": "Alta Velocidad",
+    "como_jugar": "Cómo Jugar",
+    "como_jugar_movimiento_titulo": "Movimiento Relativo",
+    "como_jugar_movimiento_desc": "Desliza en la parte inferior para maniobrar la nave sin tapar la pantalla.",
+    "como_jugar_disparo_titulo": "Disparo Táctil",
+    "como_jugar_disparo_desc": "Toca cualquier parte de la pantalla para disparar con destreza y ritmo.",
+    "como_jugar_asteroides_titulo": "Fragmentación",
+    "como_jugar_asteroides_desc": "Los asteroides grandes se dividen en dos medianos, y los medianos en dos pequeños.",
+    "como_jugar_powerups_titulo": "Power-Ups",
+    "como_jugar_powerups_desc": "Escudo azul absorbe 1 impacto sin perder vida. Triple láser verde dura 8 segundos.",
+    "instrucciones_prompt": "Desliza para moverte · Toca para disparar",
+    "entendido": "¡Entendido!"
 }

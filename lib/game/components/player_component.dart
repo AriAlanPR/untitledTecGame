@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';

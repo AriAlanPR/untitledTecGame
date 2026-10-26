@@ -14,8 +14,8 @@
 
 ## 3. Onboarding, Start Menu Arcade y Tests de Paridad
 
-- [ ] 3.1 Crear `HowToPlayDialog` con tarjetas visuales explicativas de movimiento, disparo, fragmentación y power-ups
-- [ ] 3.2 Añadir botón "¿Cómo Jugar?" y renovar la UI del `StartMenu` con diseño retro arcade neón y micro-interacciones táctiles
-- [ ] 3.3 Añadir prompt transitorio animado (2.5s) en `GameHudOverlay` al inicio de cada partida
-- [ ] 3.4 Actualizar claves de localización en `es_MX.json` y `en_US.json` de forma simétrica
-- [ ] 3.5 Escribir tests de paridad estricta para los 5 escenarios en `test/controls_and_visuals_test.dart`
+- [x] 3.1 Crear `HowToPlayDialog` con tarjetas visuales explicativas de movimiento, disparo, fragmentación y power-ups
+- [x] 3.2 Añadir botón "¿Cómo Jugar?" y renovar la UI del `StartMenu` con diseño retro arcade neón y micro-interacciones táctiles
+- [x] 3.3 Añadir prompt transitorio animado (2.5s) en `GameHudOverlay` al inicio de cada partida
+- [x] 3.4 Actualizar claves de localización en `es_MX.json` y `en_US.json` de forma simétrica
+- [x] 3.5 Escribir tests de paridad estricta para los 5 escenarios en `test/controls_and_visuals_test.dart`

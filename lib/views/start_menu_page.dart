@@ -4,6 +4,7 @@ import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/coolborders.dart';
 import 'package:untitled_tec_game/utils/log_handler.dart';
+import 'package:untitled_tec_game/widgets/how_to_play_dialog.dart';
 import 'package:untitled_tec_game/widgets/particles.dart';
 import 'package:untitled_tec_game/widgets/ship_selector_widget.dart';
 
@@ -118,9 +119,10 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
           Padding( 
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton( //NOTE - puntajes
+                  key: const Key('start_menu_scores_btn'),
                   onPressed: () {
                     println("puntitos presionado");
                     Particles(
@@ -142,11 +144,30 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                     padding: const EdgeInsets.all(4.0),
                     child: Icon(
                       Icons.emoji_events,
-                      size: height * 0.07,
+                      size: height * 0.06,
+                    ),
+                  ),
+                ),
+                ElevatedButton( //NOTE - cómo jugar
+                  key: const Key('start_menu_how_to_play_btn'),
+                  onPressed: () {
+                    println("como jugar presionado");
+                    HowToPlayDialog.show(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.lightButtonBackground,
+                    elevation: 5,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.help_outline,
+                      size: height * 0.06,
                     ),
                   ),
                 ),
                 ElevatedButton( //NOTE - configuracion
+                  key: const Key('start_menu_config_btn'),
                   onPressed: () {
                     println("configuracion presionado");
                     Particles(
@@ -169,7 +190,7 @@ class _StartMenuState extends State<StartMenu> with ValidateMixin {
                     padding: const EdgeInsets.all(4.0),
                     child: Icon(
                       Icons.settings,
-                      size: height * 0.07,
+                      size: height * 0.06,
                     ),
                   ),
                 ),
