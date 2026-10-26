@@ -3,6 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled_tec_game/game/components/first_world.dart';
+import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/services/audio_manager.dart';
 import 'package:untitled_tec_game/utils/app_colors.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
@@ -10,6 +11,7 @@ import 'package:untitled_tec_game/utils/persistent_data.dart';
 
 class TecGame extends FlameGame with HasCollisionDetection {
   final Color bgColor;
+  final ShipConfig shipConfig;
   final ValueNotifier<int> scoreNotifier = ValueNotifier<int>(0);
   final ValueNotifier<int> livesNotifier = ValueNotifier<int>(3);
   bool isGameOver = false;
@@ -20,8 +22,9 @@ class TecGame extends FlameGame with HasCollisionDetection {
   TecGame({
     super.children,
     this.bgColor = AppColors.navy,
+    this.shipConfig = ShipConfig.alphaScout,
   }) : super(
-          world: FirstWorld(),
+          world: FirstWorld(shipConfig: shipConfig),
           camera: CameraComponent.withFixedResolution(
             width: gameWidth,
             height: gameHeight,
@@ -30,8 +33,9 @@ class TecGame extends FlameGame with HasCollisionDetection {
 
   TecGame.web({
     this.bgColor = AppColors.navy,
+    this.shipConfig = ShipConfig.alphaScout,
   }) : super(
-          world: FirstWorld(),
+          world: FirstWorld(shipConfig: shipConfig),
           camera: CameraComponent.withFixedResolution(
             width: gameWidth,
             height: gameHeight,

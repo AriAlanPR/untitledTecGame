@@ -9,6 +9,26 @@ class PersistentData {
   static const String sfxEnabledKey = 'sfx_enabled';
   static const String bgmVolumeKey = 'bgm_volume';
   static const String sfxVolumeKey = 'sfx_volume';
+  static const String selectedShipKey = 'selected_ship';
+
+  static Future<String> getSelectedShip() async {
+    try {
+      if (preferences == null) await init();
+      return preferences?.getString(selectedShipKey) ?? 'alpha_scout';
+    } catch (_) {
+      return 'alpha_scout';
+    }
+  }
+
+  static Future<bool> saveSelectedShip(String shipId) async {
+    try {
+      if (preferences == null) await init();
+      await preferences?.setString(selectedShipKey, shipId);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 
   static Future<bool> getBgmEnabled() async {
     try {

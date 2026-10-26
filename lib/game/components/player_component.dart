@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
+import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/services/audio_manager.dart';
 import 'package:untitled_tec_game/utils/constants.dart';
 
@@ -25,6 +26,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   double _blinkTimer = 0.0;
   static const double blinkInterval = 0.15;
   final TecGame? customGame;
+  final ShipConfig config;
 
   bool get isInvulnerable => _isInvulnerable;
   PlayerState get playerState => _state;
@@ -42,6 +44,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     super.current,
     Vector2? position,
     this.customGame,
+    this.config = ShipConfig.alphaScout,
   }) : super(
           position: position ?? Vector2(gameWidth / 2, gameHeight - 250),
           size: Vector2(playerWidth, playerHeight),
@@ -65,7 +68,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     await super.onLoad();
 
     if (animations == null || animations!.isEmpty) {
-      final image = await gameRef.images.load('character1.png');
+      final image = await gameRef.images.load(config.spriteSheet);
       final spriteSheet = SpriteSheet(
         image: image,
         srcSize: Vector2(64, 64),
@@ -119,7 +122,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
 
     if (_state == PlayerState.shot) {
       _shotTimer += dt;
-      if (_shotTimer >= 0.6) {
+      if (_shotTimer >= config.shotCooldown) {
         _shotTimer = 0.0;
         playerState = PlayerState.idle;
       }
@@ -148,7 +151,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void dragBy(double deltaX) {
-    position.x += deltaX;
+    position.x += deltaX * config.speedMultiplier;
     position.x = position.x.clamp(minX, maxX);
 
     if (_state != PlayerState.shot) {

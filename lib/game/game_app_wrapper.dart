@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
 import 'package:untitled_tec_game/game/overlays/game_hud_overlay.dart';
 import 'package:untitled_tec_game/game/overlays/game_over_overlay.dart';
+import 'package:untitled_tec_game/models/ship_config.dart';
 import 'package:untitled_tec_game/views/configuration_page.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
 import 'package:untitled_tec_game/mixins/validate_mixin.dart';
@@ -24,8 +25,9 @@ class GameAppWrapper extends StatefulWidget {
 class _GameAppWrapperState extends State<GameAppWrapper> with ValidateMixin {
   String currentRoute = '/';
 
-  Widget _gameWidget() {
-    final game = isMobile ? TecGame() : TecGame.web();
+  Widget _gameWidget({ShipConfig? ship}) {
+    final activeShip = ship ?? ShipConfig.alphaScout;
+    final game = isMobile ? TecGame(shipConfig: activeShip) : TecGame.web(shipConfig: activeShip);
     final gameWidget = GameWidget<TecGame>(
       game: game,
       initialActiveOverlays: const ['hud'],
@@ -56,7 +58,8 @@ class _GameAppWrapperState extends State<GameAppWrapper> with ValidateMixin {
       case '/configuration':
         return ConfigurationPage();
       case '/game':
-        return _gameWidget();
+        final ship = arguments?['ship'] as ShipConfig?;
+        return _gameWidget(ship: ship);
       case '/':
       default: // Same as '/'
         return StartMenu();
