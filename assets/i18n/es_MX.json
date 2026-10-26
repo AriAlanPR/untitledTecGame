@@ -18,5 +18,10 @@
     "fin_del_juego": "Fin del Juego",
     "puntaje_final": "Puntaje Final",
     "reiniciar": "Jugar de nuevo",
-    "menu_principal": "Menú Principal"
+    "menu_principal": "Menú Principal",
+    "audio": "Audio",
+    "musica": "Música",
+    "efectos_sonido": "Efectos de Sonido",
+    "volumen_musica": "Volumen de Música",
+    "volumen_efectos": "Volumen de Efectos"
 }

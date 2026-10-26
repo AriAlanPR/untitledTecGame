@@ -18,5 +18,10 @@
     "fin_del_juego": "Game Over",
     "puntaje_final": "Final Score",
     "reiniciar": "Play Again",
-    "menu_principal": "Main Menu"
+    "menu_principal": "Main Menu",
+    "audio": "Audio",
+    "musica": "Music",
+    "efectos_sonido": "Sound Effects",
+    "volumen_musica": "Music Volume",
+    "volumen_efectos": "Sound Effects Volume"
 }
