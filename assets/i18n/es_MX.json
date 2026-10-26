@@ -41,5 +41,8 @@
     "como_jugar_powerups_titulo": "Power-Ups",
     "como_jugar_powerups_desc": "Escudo azul absorbe 1 impacto sin perder vida. Triple láser verde dura 8 segundos.",
     "instrucciones_prompt": "Desliza para moverte · Toca para disparar",
-    "entendido": "¡Entendido!"
+    "entendido": "¡Entendido!",
+    "alerta_jefe": "¡ALERTA: METAL SHARK DETECTADO!",
+    "metal_shark": "METAL SHARK",
+    "jefe_derrotado": "¡JEFE DERROTADO! +1000"
 }

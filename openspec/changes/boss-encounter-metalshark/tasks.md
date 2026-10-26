@@ -15,7 +15,7 @@
 
 ## 3. HUD con Barra de Vida, Recompensa de Derrota, Escalamiento y Tests de Paridad
 
-- [ ] 3.1 Añadir indicador de barra de vida del Boss y banner de alerta en `GameHudOverlay` sincronizado con `bossHpNotifier`
-- [ ] 3.2 Implementar secuencia de derrota (+1,000 pts de bonificación y eliminación del Boss)
-- [ ] 3.3 Reanudar `AsteroidSpawner` tras la derrota con escalamiento permanente de velocidad en 1.35x
-- [ ] 3.4 Actualizar localización en `es_MX.json` y `en_US.json` y escribir tests de paridad estricta para los 5 escenarios
+- [x] 3.1 Añadir indicador de barra de vida del Boss y banner de alerta en `GameHudOverlay` sincronizado con `bossHpNotifier`
+- [x] 3.2 Implementar secuencia de derrota (+1,000 pts de bonificación y eliminación del Boss)
+- [x] 3.3 Reanudar `AsteroidSpawner` tras la derrota con escalamiento permanente de velocidad en 1.35x
+- [x] 3.4 Actualizar localización en `es_MX.json` y `en_US.json` y escribir tests de paridad estricta para los 5 escenarios

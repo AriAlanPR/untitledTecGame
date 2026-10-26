@@ -137,6 +137,123 @@ class _GameHudOverlayState extends State<GameHudOverlay> {
             ),
           ),
         ),
+        // Boss Warning Banner
+        ValueListenableBuilder<bool>(
+          valueListenable: widget.game.bossWarningNotifier,
+          builder: (context, isWarning, _) {
+            if (!isWarning) return const SizedBox.shrink();
+
+            return Positioned(
+              top: 70,
+              left: 20,
+              right: 20,
+              child: Center(
+                child: Container(
+                  key: const Key('hud_boss_warning_banner'),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade900.withValues(alpha: 0.85),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.redAccent, width: 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.redAccent.withValues(alpha: 0.5),
+                        blurRadius: 12,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.warning_amber_rounded, color: Colors.white, size: 24),
+                      const SizedBox(width: 8),
+                      Text(
+                        "alerta_jefe".i18n(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+        // Boss Health Bar
+        ValueListenableBuilder<double?>(
+          valueListenable: widget.game.bossHpNotifier,
+          builder: (context, hp, _) {
+            if (hp == null) return const SizedBox.shrink();
+
+            return Positioned(
+              top: 70,
+              left: 30,
+              right: 30,
+              child: Center(
+                child: Container(
+                  key: const Key('hud_boss_health_bar'),
+                  width: 340,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.75),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.redAccent, width: 1.5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.redAccent.withValues(alpha: 0.3),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "metal_shark".i18n(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                          Text(
+                            '${(hp * 100).toInt()}%',
+                            style: const TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: LinearProgressIndicator(
+                          value: hp.clamp(0.0, 1.0),
+                          backgroundColor: Colors.white12,
+                          valueColor: const AlwaysStoppedAnimation<Color>(Colors.redAccent),
+                          minHeight: 8,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
         // Guidance prompt for new players
           Positioned(
             bottom: 40,

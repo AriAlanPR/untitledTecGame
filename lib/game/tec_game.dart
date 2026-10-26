@@ -21,13 +21,11 @@ class TecGame extends FlameGame with HasCollisionDetection {
   final ValueNotifier<bool> bossWarningNotifier = ValueNotifier<bool>(false);
 
   bool isGameOver = false;
-  double _sessionTime = 0.0;
+  double sessionTime = 0.0;
   bool _bossSpawned = false;
 
   int get score => scoreNotifier.value;
   int get lives => livesNotifier.value;
-  double get sessionTime => _sessionTime;
-  set sessionTime(double val) => _sessionTime = val;
   bool get bossSpawned => _bossSpawned;
   bool get isBossActive => bossHpNotifier.value != null;
 
@@ -77,8 +75,8 @@ class TecGame extends FlameGame with HasCollisionDetection {
     }
 
     if (!isGameOver) {
-      _sessionTime += dt;
-      if (!_bossSpawned && _sessionTime >= 45.0 && score >= 1500) {
+      sessionTime += dt;
+      if (!_bossSpawned && sessionTime >= 45.0 && score >= 1500) {
         triggerBossEncounter();
       }
     }
@@ -167,7 +165,7 @@ class TecGame extends FlameGame with HasCollisionDetection {
     isGameOver = false;
     _isHitStopping = false;
     _shakeTimer = 0.0;
-    _sessionTime = 0.0;
+    sessionTime = 0.0;
     _bossSpawned = false;
     bossHpNotifier.value = null;
     bossWarningNotifier.value = false;

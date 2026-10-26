@@ -3,9 +3,7 @@ import 'package:untitled_tec_game/game/components/first_world.dart';
 import 'package:untitled_tec_game/game/components/boss_component.dart';
 import 'package:untitled_tec_game/game/components/boss_plasma_component.dart';
 import 'package:untitled_tec_game/game/components/laser_component.dart';
-import 'package:untitled_tec_game/game/components/player_component.dart';
 import 'package:untitled_tec_game/game/tec_game.dart';
-import 'package:flame/extensions.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -121,6 +119,38 @@ void main() {
       final initialY = boss.position.y;
       boss.update(0.1);
       expect(boss.position.y, greaterThan(initialY));
+    });
+
+    test('Defeating boss awards bonus points and increases asteroid difficulty', () async {
+      final game = TecGame();
+      final world = game.world as FirstWorld;
+      await world.onLoad();
+
+      world.spawner.isPaused = true;
+      world.spawner.speedMultiplier = 1.0;
+
+      final boss = BossComponent(customGame: game);
+      world.add(boss);
+      boss.currentHp = 1;
+
+      expect(game.score, 0);
+
+      // Final fatal shot
+      final laser = LaserComponent(position: boss.position.clone(), customGame: game);
+      world.add(laser);
+
+      laser.onCollisionStart({boss.position}, boss);
+
+      // Defeated state
+      expect(boss.isDefeated, isTrue);
+      expect(boss.state, BossState.defeated);
+
+      // Score bonus awarded
+      expect(game.score, 1000);
+
+      // Spawner resumed with 1.35x speed
+      expect(world.spawner.isPaused, isFalse);
+      expect(world.spawner.speedMultiplier, 1.35);
     });
   });
 }

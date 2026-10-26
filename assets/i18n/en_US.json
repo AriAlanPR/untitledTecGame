@@ -41,5 +41,8 @@
     "como_jugar_powerups_titulo": "Power-Ups",
     "como_jugar_powerups_desc": "Blue shield absorbs 1 collision without life loss. Green triple laser lasts 8 seconds.",
     "instrucciones_prompt": "Drag to move · Tap to fire",
-    "entendido": "Got it!"
+    "entendido": "Got it!",
+    "alerta_jefe": "WARNING: METAL SHARK DETECTED!",
+    "metal_shark": "METAL SHARK",
+    "jefe_derrotado": "BOSS DEFEATED! +1000"
 }
